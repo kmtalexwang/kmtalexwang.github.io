@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="MaxSin 的博客">
+    <title>linux bash下如何运行Matlab程序 - MaxSin 的博客</title>
+    <meta name="author" content="MaxSin">
+    
+    
+        <link rel="icon" href="https://kmtalexwang.github.io/assets/images/favicon.png">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"MaxSin","sameAs":["https://github.com/kmtalexwang","https://weibo.com/u/3885461712"],"image":"avatar.jpg"},"articleBody":"购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。\n第一步：将程序文件上传至服务器上传至服务器有两种方法，一是用U盘或其他物理介质拷贝至服务器中，该方法较为简单，只需要完成简单的挂载操作即可，此处不再赘述。另一种则是利用ssh上传文件，为方便起见，推荐使用WinSCP进行文件的上传和下载。需要注意的是，若无法顺利登录服务器，请检查软件高级选项中的“隧道”选项卡中是否勾选并正确配置了ssh信息。\n第二步：切换工作目录该步骤仅需要运行cd命令切换至工作目录即可，注意该工作目录指的是程序所在目录。\n第三步：启动Matlab，运行程序在bash窗口下，Matlab不能显示图形界面，此时需要使用启动选项启动Matlab并执行程序。以运行当前目录下的example.m为例\n输入\n1matlab  -nodesktop -nosplash -r example\n或者\n1matlab  -nojvm -nosplash -r example\n亦或是\n1matlab -nodisplay -r example\n均可执行程序，并在bash窗口中观察到程序输出（含打印输出语句），该窗口与Matlab内建立命令行相同。\n值得注意的是，如果使用参数\n1-nodisplay -r \n运行程序，当程序中有figure()命令时会出错，可以使用如下语句限制图形的显示：\n1figure(&#39;visible&#39;,&#39;off&#39;);\n并使用如下命令将图形输出到文件：\n1print(&#39;-deps&#39;,&#39;example.eps&#39;);\n或者\n1hgsave(&#39;example.fig&#39;);\n附录 Linux下有关Matlab启动项的说明语法12matlabmatlab option1 ... optionN\nmatlab option1 … optionN 指使用指定的启动选项启动 MATLAB。\n启动选项\n\n\n\n选项\n结果\n\n\n\n\n-nodesktop\n运行JVM软件而不打开Matlab桌面，但help界面、preferences界面等仍可通过cmdline调出。此时Matlab不会在cmd history记录本次执行的命令\n\n\n-nodisplay\n启动JVM软件而不启动Matlab桌面，它会覆盖DISPLAY环境变量，即JVM启动但不能显示\n\n\n-nojvm\n启动Matlab而不启动JVM软件，不能运行需要Java软件的功能（例如桌面工具和图形显示）\n\n\n-nosplash\n不显示启动时的log画面\n\n\n-r statement\n执行指定的statement，指定为程序源码或指定为脚本或函数的名称。若statement为代码，需使用双引号将字符串引起。若statement为函数或脚本的名称，请勿指定文件扩展名，也不要使用引号。\n\n\n-logfile filename\n将命令行窗口输出（包括错误报告）复制到指定为字符串的filename中。\n\n\n\n\n","dateCreated":"2019-04-28T16:05:23+08:00","dateModified":"2020-04-13T22:58:39+08:00","datePublished":"2019-04-28T16:05:23+08:00","description":"购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言","headline":"linux bash下如何运行Matlab程序","image":["19042800.png"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://kmtalexwang.github.io/2019/04/28/2019042819/"},"publisher":{"@type":"Organization","name":"MaxSin","sameAs":["https://github.com/kmtalexwang","https://weibo.com/u/3885461712"],"image":"avatar.jpg","logo":{"@type":"ImageObject","url":"avatar.jpg"}},"url":"https://kmtalexwang.github.io/2019/04/28/2019042819/","keywords":"Linux, Bash, 命令行, Matlab","thumbnailUrl":"19042800.png"}</script>
+    <meta name="description" content="购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="linux bash下如何运行Matlab程序">
+<meta property="og:url" content="https://kmtalexwang.github.io/2019/04/28/2019042819/index.html">
+<meta property="og:site_name" content="MaxSin 的博客">
+<meta property="og:description" content="购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-04-28T08:05:23.000Z">
+<meta property="article:modified_time" content="2020-04-13T14:58:39.719Z">
+<meta property="article:author" content="MaxSin">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Bash">
+<meta property="article:tag" content="命令行">
+<meta property="article:tag" content="Matlab">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://kmtalexwang.github.io/assets/images/avatar.jpg"/>
+    
+    
+        <meta property="og:image" content="https://kmtalexwang.github.io/2019/04/28/2019042819/19042800.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://kmtalexwang.github.io/2019/04/28/2019042819/19042800.png" />
+    
+    
+    
+    <!--STYLES-->
+    
+<link rel="stylesheet" href="/assets/css/style-1udptkpril81ozu8ifd8zpujn7ipu7lefxsiu5gxx0dpnzntdx6dusvki3ao.min.css">
+
+    <!--STYLES END-->
+    
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-68706276-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+    
+</head>
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+<script src="assets/js/jquery.js"></script>
+<div class="waifu">
+    <div class="waifu-tips"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+</div>
+
+<script async src="assets/js/waifu-tips.js"></script>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/%20">MaxSin 的博客</a>
+    </div>
+    
+        
+            <a  class="header-right-picture "
+                href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">MaxSin</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>UAV<br>Massive MIMO<br>Random Access<br>Channel Estimation</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/%20"
+                            
+                            title="首页"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                            title="分类"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                            title="标签"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                            title="归档"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/kmtalexwang" target="_blank" rel="noopener" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://weibo.com/u/3885461712" target="_blank" rel="noopener" title="微博">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-weibo" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">微博</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                            title="RSS"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/hao"
+                            
+                            title="友链导航"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-address-book" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">友链导航</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/copyright"
+                            
+                            title="版权说明"
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-copyright" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">版权说明</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            linux bash下如何运行Matlab程序
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-04-28T16:05:23+08:00">
+	
+		    4月 28, 2019
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言<a id="more"></a>，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。</p>
+<h2 id="第一步：将程序文件上传至服务器"><a href="#第一步：将程序文件上传至服务器" class="headerlink" title="第一步：将程序文件上传至服务器"></a>第一步：将程序文件上传至服务器</h2><p>上传至服务器有两种方法，一是用U盘或其他物理介质拷贝至服务器中，该方法较为简单，只需要完成简单的挂载操作即可，此处不再赘述。另一种则是利用ssh上传文件，为方便起见，推荐使用WinSCP进行文件的上传和下载。需要注意的是，若无法顺利登录服务器，请检查软件高级选项中的“隧道”选项卡中是否勾选并正确配置了ssh信息。</p>
+<h2 id="第二步：切换工作目录"><a href="#第二步：切换工作目录" class="headerlink" title="第二步：切换工作目录"></a>第二步：切换工作目录</h2><p>该步骤仅需要运行cd命令切换至工作目录即可，注意该工作目录指的是程序所在目录。</p>
+<h2 id="第三步：启动Matlab，运行程序"><a href="#第三步：启动Matlab，运行程序" class="headerlink" title="第三步：启动Matlab，运行程序"></a>第三步：启动Matlab，运行程序</h2><p>在bash窗口下，Matlab不能显示图形界面，此时需要使用启动选项启动Matlab并执行程序。以运行当前目录下的example.m为例</p>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matlab  -nodesktop -nosplash -r example</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matlab  -nojvm -nosplash -r example</span><br></pre></td></tr></table></figure>
+<p>亦或是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">matlab -nodisplay -r example</span><br></pre></td></tr></table></figure>
+<p>均可执行程序，并在bash窗口中观察到程序输出（含打印输出语句），该窗口与Matlab内建立命令行相同。</p>
+<p>值得注意的是，如果使用参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-nodisplay -r </span><br></pre></td></tr></table></figure>
+<p>运行程序，当程序中有figure()命令时会出错，可以使用如下语句限制图形的显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">figure(&#39;visible&#39;,&#39;off&#39;);</span><br></pre></td></tr></table></figure>
+<p>并使用如下命令将图形输出到文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(&#39;-deps&#39;,&#39;example.eps&#39;);</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hgsave(&#39;example.fig&#39;);</span><br></pre></td></tr></table></figure>
+<h2 id="附录-Linux下有关Matlab启动项的说明"><a href="#附录-Linux下有关Matlab启动项的说明" class="headerlink" title="附录 Linux下有关Matlab启动项的说明"></a>附录 Linux下有关Matlab启动项的说明</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">matlab</span><br><span class="line">matlab option1 ... optionN</span><br></pre></td></tr></table></figure>
+<p>matlab option1 … optionN 指使用指定的启动选项启动 MATLAB。</p>
+<h3 id="启动选项"><a href="#启动选项" class="headerlink" title="启动选项"></a>启动选项</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">选项</th>
+<th style="text-align:left">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-nodesktop</td>
+<td style="text-align:left">运行JVM软件而不打开Matlab桌面，但help界面、preferences界面等仍可通过cmdline调出。此时Matlab不会在cmd history记录本次执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:left">-nodisplay</td>
+<td style="text-align:left">启动JVM软件而不启动Matlab桌面，它会覆盖DISPLAY环境变量，即JVM启动但不能显示</td>
+</tr>
+<tr>
+<td style="text-align:left">-nojvm</td>
+<td style="text-align:left">启动Matlab而不启动JVM软件，不能运行需要Java软件的功能（例如桌面工具和图形显示）</td>
+</tr>
+<tr>
+<td style="text-align:left">-nosplash</td>
+<td style="text-align:left">不显示启动时的log画面</td>
+</tr>
+<tr>
+<td style="text-align:left">-r statement</td>
+<td style="text-align:left">执行指定的statement，指定为程序源码或指定为脚本或函数的名称。若statement为代码，需使用双引号将字符串引起。若statement为函数或脚本的名称，请勿指定文件扩展名，也不要使用引号。</td>
+</tr>
+<tr>
+<td style="text-align:left">-logfile filename</td>
+<td style="text-align:left">将命令行窗口输出（包括错误报告）复制到指定为字符串的filename中。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Bash/" rel="tag">Bash</a> <a class="tag tag--primary tag--small t-link" href="/tags/Linux/" rel="tag">Linux</a> <a class="tag tag--primary tag--small t-link" href="/tags/Matlab/" rel="tag">Matlab</a> <a class="tag tag--primary tag--small t-link" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag">命令行</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/23/2019012300/" data-tooltip="RSRP 你搞懂了吗？" aria-label="下一篇: RSRP 你搞懂了吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Weibo">
+                    <i class="fa fa-weibo" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://kmtalexwang.github.io/2019/04/28/2019042819/&amp;title=linux bash下如何运行Matlab程序" title="分享到 QQ">
+                    <i class="fa fa-qq" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment-o"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2020 MaxSin. All Rights Reserved.
+        <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br />本作品采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/23/2019012300/" data-tooltip="RSRP 你搞懂了吗？" aria-label="下一篇: RSRP 你搞懂了吗？">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Diesen Beitrag teilen">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Facebook">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Google+">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://service.weibo.com/share/share.php?&amp;title=https://kmtalexwang.github.io/2019/04/28/2019042819/" title="分享到 Weibo">
+                    <i class="fa fa-weibo" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://kmtalexwang.github.io/2019/04/28/2019042819/&amp;title=linux bash下如何运行Matlab程序" title="分享到 QQ">
+                    <i class="fa fa-qq" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment-o"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Nach oben">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://kmtalexwang.github.io/2019/04/28/2019042819/">
+                    <i class="fa fa-facebook-official" aria-hidden="true"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://kmtalexwang.github.io/2019/04/28/2019042819/">
+                    <i class="fa fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://kmtalexwang.github.io/2019/04/28/2019042819/">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://service.weibo.com/share/share.php?&amp;title=https://kmtalexwang.github.io/2019/04/28/2019042819/">
+                    <i class="fa fa-weibo" aria-hidden="true"></i><span>分享到 Weibo</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="http://connect.qq.com/widget/shareqq/index.html?url=https://kmtalexwang.github.io/2019/04/28/2019042819/&amp;title=linux bash下如何运行Matlab程序">
+                    <i class="fa fa-qq" aria-hidden="true"></i><span>分享到 QQ</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar.jpg" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">MaxSin</h4>
+        
+            <div id="about-card-bio"><p>UAV<br>Massive MIMO<br>Random Access<br>Channel Estimation</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Master of Science</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Harbin
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+
+<script src="/assets/js/script-yhuo2grt8r7qkqumzgjoglkfbicl1thukjgmla6jopu56zpcowfedi5zjcor.min.js"></script>
+
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://kmtalexwang.github.io/2019/04/28/2019042819/';
+                 
+                    this.page.identifier = '2019/04/28/2019042819/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'kmtalexwang';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+    <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Pio.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.8},"log":false});</script></body>
+</html>
