@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kmtalexwang.github.io/"/>
-  <updated>2020-04-15T06:57:22.102Z</updated>
+  <updated>2020-04-15T10:27:55.239Z</updated>
   <id>https://kmtalexwang.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Morocco</title>
+    <link href="https://kmtalexwang.github.io/2019/06/30/2019063008/"/>
+    <id>https://kmtalexwang.github.io/2019/06/30/2019063008/</id>
+    <published>2019-06-30T00:22:29.000Z</published>
+    <updated>2020-04-15T10:27:55.239Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;img src=&quot;/2019/06/30/2019063008/19063001.jpg&quot; class=&quot;&quot;&gt;
+&lt;img src=&quot;/2019/06/30/2019063008/19063002.jpg&quot; class=&quot;&quot;&gt;
+&lt;img
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="旅行" scheme="https://kmtalexwang.github.io/tags/%E6%97%85%E8%A1%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>linux bash下如何运行Matlab程序</title>
@@ -187,11 +214,11 @@
       <category term="算法" scheme="https://kmtalexwang.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
       <category term="谓词逻辑" scheme="https://kmtalexwang.github.io/tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91/"/>
     
       <category term="猴子摘香蕉" scheme="https://kmtalexwang.github.io/tags/%E7%8C%B4%E5%AD%90%E6%91%98%E9%A6%99%E8%95%89/"/>
-    
-      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
