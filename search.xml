@@ -1,125 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>都江堰</title>
-    <url>/2020/05/15/2020051522/</url>
-    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
-<a id="more"></a>
-<img src="/2020/05/15/2020051522/20200502.jpg" class="">
+    <title>浅谈芯片电源脚电容的取值问题</title>
+    <url>/2018/04/15/2018041521/</url>
+    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
+<h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
+<p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
+<p>一些PCB设计指导认为，在电源端放置一个1~10uF的电容来滤除低频噪声，在每个器件的电源与地之间放置一个0.01~0.1uF的电容来滤除高频噪声，显然这是从滤波的层面去考虑的。我们知道，电路要稳定可靠的运行，其电源一定要“干净”。所谓干净就是不能有杂波，在数字电路中，我们常常会看见FPGA的旁边和底面放置有大量的贴片电容，又如在模拟电路中，音乐发烧友总要在线性电源中放许多上千uF的大电容构建“大水塘”，这实际上就是为了滤除电源中的杂波。</p>
+<p>而去耦电容这一术语又是来形容什么的呢？顾名思义，用在退耦电路中的电容就是退耦电容，所谓退耦，就是为了防止电路中电流发生变化时，在供电电路中所形成的电流冲击对电路的正常工作产生影响。换言之，退耦电路能够有效的消除电路网络之间的寄生耦合。因此，退耦可以看作是滤波的一个小类。</p>
+<h2 id="滤波的取值问题">滤波的取值问题</h2>
+<p>搞清楚了什么是滤波，什么是退耦，我们接下来需要知道，为什么滤波电容总是要选择100nF和10uF。实际上上文所提到的“设计指导”已经描述了作为滤波时，电容的取值方法。而对于退耦，一些资料往往从储能的角度来谈，另一些则是从阻抗的角度来谈。储能理论认为：电容和负载同时跨接在电源两端，当负载电流不变时，其电流由稳压电源提供，此时电容两端电压与负载两端电压一致，且流过电容的电流为0。当负载瞬态电流发生变化时，由于负载芯片内部晶体管电平转换速度极快，必须在极短的时间内为负载芯片提供足够的电流，但是稳压电源无法很快响应负载电流的变化，因此负载芯片电压会降低。但是随着负载两端电压的降低，电容开始放电，为负载芯片提供电流。也就是说电容通过储存电能的方式为负载的瞬时电流提供了缓冲，使得负载两端的电压不发生显著变化，从而保证电路的正常运行。实际上，以上分析并没有什么卵用，他根本不能指导我们选用多大的电容，依据I=Cdv/dt，我们只知道C越大越好。因而有人提出了阻抗理论来指导我们选用电容。</p>
+<div class="note defult">
+            <p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
+          </div>
+<p>这段话来自一位业内专家，实际上它描述的是将电源和负载看作并联在一起构成的复合电源系统。该系统可以等效为电源与一个阻抗器件相串联，则退耦电容被认为是跨接在该系统的两端。我们知道ΔV=ΔI*z，为了保证负载两端的电压不发生较大的变化，也即复合电源系统两端的电压不发生较大的变化，我们需要使电容的阻抗尽可能的小，而电容的阻抗与容值由显式关系，因而根据器件的相关参数，我们可以通过计算得到退耦电容的取值。</p>
+<p>实际上，不论是储能还是阻抗都是相对理论化的解释，而我们常用的100nF和10uF则是真正的经验之谈。</p>
+<div class="note defult">
+            <p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
+          </div>
+<p>正如这位专家所言，随着电子行业的高速发展，电子产品行业链的分工越来越明确，定位和分工越来越细化，一般的电子产品公司已经不再参与电路设计，取而代之的是来自芯片厂商的一系列种类繁多的解决方案，有的厂商甚至提供多方面的筛选功能，从造价、占地面积、效率等等一系列方面提供了完备的筛选机制帮助设计人员找到最合适的电路设计。因而，正是由于这种职能转变，使得104被广泛应用，并逐渐成为业内的“设计规范”。</p>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>电路与系统</category>
       </categories>
       <tags>
-        <tag>都江堰</tag>
+        <tag>退耦</tag>
+        <tag>滤波</tag>
       </tags>
   </entry>
   <entry>
-    <title>百里荒</title>
-    <url>/2020/05/15/2020051523/</url>
-    <content><![CDATA[<img src="/2020/05/15/2020051523/20200503.jpg" class="">
-<a id="more"></a>
-<img src="/2020/05/15/2020051523/20200504.jpg" class="">
+    <title>移动通信网络的基本组成</title>
+    <url>/2018/04/19/2018041916/</url>
+    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<a id="more"></a></p>
+<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
+<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
+<h1 id="g网络的组成">3G网络的组成</h1>
+<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
+<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
+<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
+<h1 id="lte网络的组成">LTE网络的组成</h1>
+<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
+<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
+<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
+<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
+<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>百里荒</tag>
+        <tag>移动通信</tag>
+        <tag>LTE</tag>
       </tags>
   </entry>
   <entry>
-    <title>Morocco</title>
-    <url>/2019/06/30/2019063008/</url>
-    <content><![CDATA[<img src="/2019/06/30/2019063008/19063001.jpg" class="">
-<a id="more"></a>
-<img src="/2019/06/30/2019063008/19063002.jpg" class="">
-<img src="/2019/06/30/2019063008/19063003.jpg" class="">
+    <title>用三层BP神经网络解决字母T和L的识别问题</title>
+    <url>/2018/07/08/2018070817/</url>
+    <content><![CDATA[<p>  用三层BP神经网络解决字母T和L的识别问题。如图所示，每个字母用3x3的二维二值图表示，令黑方格为1，白方格为0，每个字母有4个样本，包括字母正常位置及旋转90，180和270°的图像。希望输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0。用BP算法求出权系数和阈值。<a id="more"></a>建议：旋转网络结构为9-3-1。隐单元非线性函数为<span class="math inline">\(AT\left( x,w \right)\)</span>，输出单元非线性函数为<span class="math inline">\(f(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span></p>
+<img src="/2018/07/08/2018070817/18070801.png" class="clear" title="图1 字母样本">
+<h3 id="实验方案">1 实验方案</h3>
+<p>  本实验通过搭建三层BP神经网络来解决字母T和L的识别问题。实验方案主要分为数据预处理，模型搭建以及训练识别三大模块。</p>
+<h4 id="数据预处理">1.1 数据预处理</h4>
+<p>  本次实验数据为上面的字母样本图，每个字母有4个样本，包括字母正常位置及旋转90°，180°和270°的图像。我们令黑方格为1，白方格为0，且按照下图1到9的顺序进行记录，得到数据集矩阵（一列代表一个样本，共八列）。并根据输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0来记录数据标签（八列，每列代表对应样本的输出）。</p>
+<img src="/2018/07/08/2018070817/18070802.png" class="clear" title="图2 样本记录顺序">
+<img src="/2018/07/08/2018070817/18070803.png" class="clear" title="图3 数据集矩阵（每列为一个样本）">
+<img src="/2018/07/08/2018070817/18070804.png" class="clear" title="图4 数据集标签（每列为一个标签）">
+<h4 id="模型搭建">1.2 模型搭建</h4>
+<p>  如图5所示为三层BP神经网络架构，其中第一层到第二层之间权值参数为<span class="math inline">\({W_1}\)</span>（大小为<span class="math inline">\(3\times 9\)</span>）和<span class="math inline">\({b_1}\)</span>（大小为<span class="math inline">\(3\times 1\)</span>），激活函数为<span class="math inline">\({f_1}(x)=\frac{2}{1+{e^{-\alpha x}}}-1\)</span>，第二层到第三层之间权值参数为<span class="math inline">\({W_2}\)</span>（大小为<span class="math inline">\(1\times 3\)</span>）和<span class="math inline">\({b_2}\)</span>（大小为<span class="math inline">\(1\times 1\)</span>），激活函数为<span class="math inline">\({f_2}(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span>，在最后为了输出0或1，增加一个门限函数<span class="math inline">\({f_3}(x)=\left\{ \begin{array} 0\ x&lt;0.5 \\ 1\ o.w. \end{array} \right.\)</span></p>
+<img src="/2018/07/08/2018070817/18070805.png" class="clear" title="图5 三层BP神经网络架构">
+<p>  搭建好上述模型后，使用BP算法计算梯度，反向传播算法步骤如下：</p>
+<p>1.计算前向传播的每个神经元的值，从层<span class="math inline">\({L_2}\)</span> , <span class="math inline">\({L_3}\)</span>,...直到输出层<span class="math inline">\({L_n}\)</span>。其中<span class="math inline">\(a_m^{(n+1)}=f(\sum\limits_{i}{W_{mi}^{(n)}a_i^{n}}+b_m^{(n)})\)</span></p>
+<p>2.对于输出层的节点，计算<span class="math inline">\(\delta _i^{nl}= \frac{\partial}{\partial z_i^{nl}}\frac{1}{2}\left\| {h_{W,b}}(x)-y \right\|^{2}=-(y_i-a_i^{nl})\cdot f&#39;(z_i^{nl})\)</span>。</p>
+<p>3.对于<span class="math inline">\(l=n_l-1,n_l-2,n_l-3,...,2\)</span>，对每个中间层的节点计算<span class="math inline">\(\delta _i^l=\left( \sum\limits_{j=1}^{s_{l+1}}{W_{ji}^l\delta _j^{l+1}} \right)\cdot f&#39;(z_i^l)\)</span> 。</p>
+<p>4.计算所需的偏导数，为以下两个表达式</p>
+<p><span class="math inline">\(\frac{\partial }{\partial W_{ij}^l}J(W,b)=a_j^l\delta _i^{l+1}\)</span></p>
+<p><span class="math inline">\(\frac{\partial }{\partial b_i^l}J(W,b)=\delta _i^{l+1}\)</span></p>
+<p>  反向传播算法如上所示。其实对于每个节点，它都是先计算相对于该节点的 “误差项”<span class="math inline">\(\delta _i^l\)</span> 。然后计算基于<span class="math inline">\(a_i^l\)</span> 的<span class="math inline">\(\delta _i^l\)</span>，并取其加权平均。 根据BP算法进行迭代，直到训练模型到代价函数取最小值。此时模型最优。其中本实验取得参数<span class="math inline">\(\alpha =1\)</span>。 本实验通过训练上述的八个样本，得到最优模型，然后依旧用这八个去检验输出结果，与其标签进行比较，得到识别率，结果如下。</p>
+<img src="/2018/07/08/2018070817/18070806.png" class="clear" title="图6 实验结果">
+<h3 id="实验结论">2 实验结论</h3>
+<p>  该实验通过搭建三层BP神经网络，通过数据预处理，模型搭建以及训练识别三大模块解决字母T和L的识别问题。最后用这八个样本去检验识别结果，与其标签进行比较，得到100%的识别率。</p>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>Morocco</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux bash下如何运行Matlab程序</title>
-    <url>/2019/04/28/2019042819/</url>
-    <content><![CDATA[<p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。<a id="more"></a></p>
-<h2 id="第一步将程序文件上传至服务器">第一步：将程序文件上传至服务器</h2>
-<p>上传至服务器有两种方法，一是用U盘或其他物理介质拷贝至服务器中，该方法较为简单，只需要完成简单的挂载操作即可，此处不再赘述。另一种则是利用ssh上传文件，为方便起见，推荐使用WinSCP进行文件的上传和下载。需要注意的是，若无法顺利登录服务器，请检查软件高级选项中的“隧道”选项卡中是否勾选并正确配置了ssh信息。</p>
-<h2 id="第二步切换工作目录">第二步：切换工作目录</h2>
-<p>该步骤仅需要运行cd命令切换至工作目录即可，注意该工作目录指的是程序所在目录。</p>
-<h2 id="第三步启动matlab运行程序">第三步：启动Matlab，运行程序</h2>
-<p>在bash窗口下，Matlab不能显示图形界面，此时需要使用启动选项启动Matlab并执行程序。以运行当前目录下的example.m为例</p>
-<p>输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab  -nodesktop -nosplash -r example</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab  -nojvm -nosplash -r example</span><br></pre></td></tr></table></figure>
-<p>亦或是</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab -nodisplay -r example</span><br></pre></td></tr></table></figure>
-<p>均可执行程序，并在bash窗口中观察到程序输出（含打印输出语句），该窗口与Matlab内建立命令行相同。</p>
-<p>值得注意的是，如果使用参数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-nodisplay -r </span><br></pre></td></tr></table></figure>
-<p>运行程序，当程序中有figure()命令时会出错，可以使用如下语句限制图形的显示：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">figure(&#39;visible&#39;,&#39;off&#39;);</span><br></pre></td></tr></table></figure>
-<p>并使用如下命令将图形输出到文件：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&#39;-deps&#39;,&#39;example.eps&#39;);</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hgsave(&#39;example.fig&#39;);</span><br></pre></td></tr></table></figure>
-<h2 id="附录-linux下有关matlab启动项的说明">附录 Linux下有关Matlab启动项的说明</h2>
-<h3 id="语法">语法</h3>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab</span><br><span class="line">matlab option1 ... optionN</span><br></pre></td></tr></table></figure>
-<p>matlab option1 ... optionN 指使用指定的启动选项启动 MATLAB。</p>
-<h3 id="启动选项">启动选项</h3>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">选项</th>
-<th style="text-align: left;">结果</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">-nodesktop</td>
-<td style="text-align: left;">运行JVM软件而不打开Matlab桌面，但help界面、preferences界面等仍可通过cmdline调出。此时Matlab不会在cmd history记录本次执行的命令</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">-nodisplay</td>
-<td style="text-align: left;">启动JVM软件而不启动Matlab桌面，它会覆盖DISPLAY环境变量，即JVM启动但不能显示</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">-nojvm</td>
-<td style="text-align: left;">启动Matlab而不启动JVM软件，不能运行需要Java软件的功能（例如桌面工具和图形显示）</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">-nosplash</td>
-<td style="text-align: left;">不显示启动时的log画面</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">-r statement</td>
-<td style="text-align: left;">执行指定的statement，指定为程序源码或指定为脚本或函数的名称。若statement为代码，需使用双引号将字符串引起。若statement为函数或脚本的名称，请勿指定文件扩展名，也不要使用引号。</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">-logfile filename</td>
-<td style="text-align: left;">将命令行窗口输出（包括错误报告）复制到指定为字符串的filename中。</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      <categories>
-        <category>计算机</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-        <tag>Bash</tag>
-        <tag>命令行</tag>
-        <tag>Matlab</tag>
+        <tag>机器学习</tag>
+        <tag>BP神经网络</tag>
+        <tag>识别</tag>
       </tags>
   </entry>
   <entry>
@@ -228,143 +195,87 @@
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>信道</tag>
         <tag>RSRP</tag>
+        <tag>信道</tag>
       </tags>
   </entry>
   <entry>
-    <title>MIMO 信道容量推导</title>
-    <url>/2018/09/22/2018092215/</url>
-    <content><![CDATA[<p>MIMO (Multiple-Input Multiple-Output) 技术指在发射端和接收端分别使用多个发射天线和接收天线，使信号通过发射端与接收端的多个天线传送和接收的通信方式。与传统的SISO系统相比，MIMO系统充分地利用了空间分集，通过多个天线实现多发多收，在不增加频谱资源和天线发射功率的情况下，可以成倍的提高系统信道容量，是第四代移动通信的核心技术。其演进技术大规模MIMO (Massive MIMO)，被视为下一代移动通信技术的关键。<a id="more"></a></p>
-<h3 id="mimo系统模型">MIMO系统模型</h3>
-<p>设发射信号为<span class="math inline">\({x}\)</span>，则接收信号可以表示为</p>
-<p><span class="math display">\[
-\begin{align}
-\label{mod 1}
-y={\rm{H}}x+n,
-\end{align}
-\]</span></p>
-<p>其中<span class="math inline">\({y}\)</span>为接收信号，加性高斯白噪声<span class="math inline">\({n\sim\left(0,\sigma^2\rm{I}\right)}\)</span>。假设发送端天线数量为<span class="math inline">\({M_T}\)</span>，接收端天线数量为<span class="math inline">\({M_R}\)</span>，则可以改写为</p>
-<p><span class="math display">\[
-\begin{equation}
-    \label{mod 2}
-    \begin{bmatrix}
-    y_1\\
-    \vdots \\
-    y_{M_R}
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-        h_{11}&amp; \cdots &amp;h_{1M_T}\\
-        \vdots &amp; \ddots &amp; \vdots \\
-        h_{M_R1}&amp; \cdots &amp;h_{M_RM_T}
-    \end{bmatrix}
-    \begin{bmatrix}
-        x_1\\
-        \vdots \\
-        x_{M_T}
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-        n_1\\
-        \vdots \\
-        n_{M_R}
-    \end{bmatrix}.
-\end{equation}
-\]</span></p>
-<p>式满足以下两个条件</p>
-<ol type="1">
-<li><p>接收信号数量<span class="math inline">\(&gt;\)</span>发射信号</p></li>
-<li><p>秩<span class="math inline">\(=\)</span>发射信号数</p></li>
-</ol>
-<p>且环境足够复杂，信道具有足够大的独立性。</p>
-<p>对发送信号，<span class="math inline">\(x_j\)</span>为0均值高斯变量，其形式为<span class="math inline">\(x=\left[x_1,\cdots,x_{M_T}\right]\)</span>，其协方差<span class="math inline">\(R_{xx}=E\left\{xx^H\right\}\)</span>，则总发射功率为<span class="math inline">\(P_T=tr\left(R_{xx}\right)\)</span>。</p>
-<p>对信道矩阵有</p>
-<p><span class="math display">\[
-\begin{align}
-\sum^{M_T}_{j=1}\lvert x\rvert=M_T,i=1,2,\cdots,M_R.
-\end{align}
-\]</span></p>
-<p>对接收端噪声，<span class="math inline">\(n\)</span>为独立的0均值复高斯随机变量，其中</p>
-<p><span class="math display">\[
-\begin{align}
-R_{nn}=E\left\{nn^H\right\},
-\end{align}
-\]</span></p>
-<p>若不相关，则有<span class="math inline">\(R_{nn}=\sigma^2I_{M_R}\)</span>。</p>
-<h3 id="mimo信道容量">MIMO信道容量</h3>
-<p>目前广泛采用的有两种推导方法，其一是根据香农公式得出的，另一种则是利用奇异值分解得出的，两种方法各自具有不同的优点，适用于不同环境。</p>
-<h4 id="香农公式法">香农公式法</h4>
-<p>在接收端，接收信号的协方差为</p>
-<p><span class="math display">\[
-\begin{array}{lll}
-R_{yy} &amp; =E\left\{yy^H\right\}\\
- &amp; =E\left\{({\rm{H}}x+n)({\rm{H}}x+n)^H\right\}\\
- &amp; ={\rm{H}}E\left\{xx^H\right\}{\rm{H}}^H + E\left\{nn^H\right\} + {\rm{H}}E\left\{xn\right\} + {\rm{H}}^HE\left\{nx^H\right\}\\
- &amp; ={\rm{H}}R_{xx}{\rm{H}}^H + \sigma^2I_{M_R}.
-\end{array}
-\]</span></p>
-<p>而信号<span class="math inline">\(x\)</span>与噪声<span class="math inline">\(n\)</span>不相关，故有<span class="math inline">\(E\left\{xn\right\}+E\left\{nx^H\right\}=0\)</span>。</p>
-<p>假设接收端已知信道矩阵<span class="math inline">\({\rm{H}}\)</span>，则瞬时信道容量可以写为</p>
-<p><span class="math display">\[
-\begin{align}
-C\left({\rm{H}}\right)=max_{f_X(x)}I\left(x,y\right),
-\end{align}
-\]</span></p>
-<p>其中，<span class="math inline">\(I\left(x,y\right)\)</span>为发射信号<span class="math inline">\(x\)</span>与接收信号<span class="math inline">\(y\)</span>间的互信息量，有</p>
-<p><span class="math display">\[
-\begin{align}
-I\left(x,y\right)=H\left(y\right)+H\left(y\mid x\right),
-\end{align}
-\]</span></p>
-<p>其中，<span class="math inline">\(H\left(y\right)=-\sum\left(y\right)log_2 p\left(y\right)\)</span>为<span class="math inline">\(y\)</span>的信息熵，<span class="math inline">\(p\left(y\right)\)</span>为<span class="math inline">\(y\)</span>的概率密度。<span class="math inline">\(H\left(y\mid x\right)\)</span>是给定<span class="math inline">\(x\)</span>条件下<span class="math inline">\(y\)</span>的差分熵。因为发射信号<span class="math inline">\(x\)</span>与噪声<span class="math inline">\(n\)</span>相互独立，故有<span class="math inline">\(H\left(y\mid x\right)=H\left(n\right)\)</span>，则上式可写为</p>
-<p><span class="math display">\[
-\begin{align}
-I\left(x,y\right)=H\left(y\right)+H\left(n\right),
-\end{align}
-\]</span></p>
-<p>在完美信道信息条件下，噪声的概率密度函数已知，故<span class="math inline">\(H\left(n\right)\)</span>为一常数。当信道为加性高斯信道时，发射信号与接收信号均服从高斯分布，此时<span class="math inline">\(I\left(x,y\right)\)</span>最大，为信道容量。则上式中有</p>
-<p><span class="math display">\[
-\begin{align}
-H\left(y\right)=\frac{1}{2}log_2\left\{det\left[\pi eR_{yy}\right]\right\}bit,
-\end{align}
-\]</span></p>
-<p><span class="math display">\[
-\begin{align}
-H\left(n\right)=\frac{1}{2}log_2\left\{det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit.
-\end{align}
-\]</span></p>
-<p>则瞬时信道容量为</p>
-<p><span class="math display">\[
-\begin{array}{lll}
-C\left({\rm{H}}\right) &amp; =\frac{1}{2}log_2\left\{det\left[\pi eR_{yy}\right]/det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit\\
- &amp; =\frac{1}{2}log_2\left\{det\left[\pi e\sigma^2I_{M_R}\left(I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right)\right]/det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit\\
- &amp; =\frac{1}{2}log_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]\right\}bit.\\
-\end{array}
-\]</span></p>
-<p>定义信道容量为一段时间内的平均互信息，则MIMO系统的信道容量为</p>
-<p><span class="math display">\[
-\begin{align}
-C=\frac{1}{T}C\left({\rm{H}}\right),
-\end{align}
-\]</span></p>
-<p>其中，<span class="math inline">\(T\)</span>为符号周期。考虑到采样定理，<span class="math inline">\(1/T\)</span>应大于两倍带宽<span class="math inline">\(B\)</span>，故取<span class="math inline">\(1/T=2B\)</span>，则有</p>
-<p><span class="math display">\[
-\begin{align}
-C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]\right\}bit/s
-\end{align}
-\]</span></p>
-<h4 id="奇异值分解法">奇异值分解法</h4>
-<p>持续更新中。。。</p>
-<p>注：本文公式推导部分来源于研究生课程《现代数字通信》，故本文不遵循文末的CC BY-NC-SA许可协议。</p>
+    <title>linux bash下如何运行Matlab程序</title>
+    <url>/2019/04/28/2019042819/</url>
+    <content><![CDATA[<p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。<a id="more"></a></p>
+<h2 id="第一步将程序文件上传至服务器">第一步：将程序文件上传至服务器</h2>
+<p>上传至服务器有两种方法，一是用U盘或其他物理介质拷贝至服务器中，该方法较为简单，只需要完成简单的挂载操作即可，此处不再赘述。另一种则是利用ssh上传文件，为方便起见，推荐使用WinSCP进行文件的上传和下载。需要注意的是，若无法顺利登录服务器，请检查软件高级选项中的“隧道”选项卡中是否勾选并正确配置了ssh信息。</p>
+<h2 id="第二步切换工作目录">第二步：切换工作目录</h2>
+<p>该步骤仅需要运行cd命令切换至工作目录即可，注意该工作目录指的是程序所在目录。</p>
+<h2 id="第三步启动matlab运行程序">第三步：启动Matlab，运行程序</h2>
+<p>在bash窗口下，Matlab不能显示图形界面，此时需要使用启动选项启动Matlab并执行程序。以运行当前目录下的example.m为例</p>
+<p>输入</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab  -nodesktop -nosplash -r example</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab  -nojvm -nosplash -r example</span><br></pre></td></tr></table></figure>
+<p>亦或是</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab -nodisplay -r example</span><br></pre></td></tr></table></figure>
+<p>均可执行程序，并在bash窗口中观察到程序输出（含打印输出语句），该窗口与Matlab内建立命令行相同。</p>
+<p>值得注意的是，如果使用参数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-nodisplay -r </span><br></pre></td></tr></table></figure>
+<p>运行程序，当程序中有figure()命令时会出错，可以使用如下语句限制图形的显示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">figure(&#39;visible&#39;,&#39;off&#39;);</span><br></pre></td></tr></table></figure>
+<p>并使用如下命令将图形输出到文件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(&#39;-deps&#39;,&#39;example.eps&#39;);</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hgsave(&#39;example.fig&#39;);</span><br></pre></td></tr></table></figure>
+<h2 id="附录-linux下有关matlab启动项的说明">附录 Linux下有关Matlab启动项的说明</h2>
+<h3 id="语法">语法</h3>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">matlab</span><br><span class="line">matlab option1 ... optionN</span><br></pre></td></tr></table></figure>
+<p>matlab option1 ... optionN 指使用指定的启动选项启动 MATLAB。</p>
+<h3 id="启动选项">启动选项</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">选项</th>
+<th style="text-align: left;">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">-nodesktop</td>
+<td style="text-align: left;">运行JVM软件而不打开Matlab桌面，但help界面、preferences界面等仍可通过cmdline调出。此时Matlab不会在cmd history记录本次执行的命令</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-nodisplay</td>
+<td style="text-align: left;">启动JVM软件而不启动Matlab桌面，它会覆盖DISPLAY环境变量，即JVM启动但不能显示</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">-nojvm</td>
+<td style="text-align: left;">启动Matlab而不启动JVM软件，不能运行需要Java软件的功能（例如桌面工具和图形显示）</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-nosplash</td>
+<td style="text-align: left;">不显示启动时的log画面</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">-r statement</td>
+<td style="text-align: left;">执行指定的statement，指定为程序源码或指定为脚本或函数的名称。若statement为代码，需使用双引号将字符串引起。若statement为函数或脚本的名称，请勿指定文件扩展名，也不要使用引号。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-logfile filename</td>
+<td style="text-align: left;">将命令行窗口输出（包括错误报告）复制到指定为字符串的filename中。</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
-        <category>信息与通信工程</category>
+        <category>计算机</category>
       </categories>
       <tags>
-        <tag>信道</tag>
-        <tag>MIMO</tag>
-        <tag>信道容量</tag>
+        <tag>Linux</tag>
+        <tag>Bash</tag>
+        <tag>命令行</tag>
+        <tag>Matlab</tag>
       </tags>
   </entry>
   <entry>
@@ -506,39 +417,138 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
       </tags>
   </entry>
   <entry>
-    <title>用三层BP神经网络解决字母T和L的识别问题</title>
-    <url>/2018/07/08/2018070817/</url>
-    <content><![CDATA[<p>  用三层BP神经网络解决字母T和L的识别问题。如图所示，每个字母用3x3的二维二值图表示，令黑方格为1，白方格为0，每个字母有4个样本，包括字母正常位置及旋转90，180和270°的图像。希望输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0。用BP算法求出权系数和阈值。<a id="more"></a>建议：旋转网络结构为9-3-1。隐单元非线性函数为<span class="math inline">\(AT\left( x,w \right)\)</span>，输出单元非线性函数为<span class="math inline">\(f(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span></p>
-<img src="/2018/07/08/2018070817/18070801.png" class="clear" title="图1 字母样本">
-<h3 id="实验方案">1 实验方案</h3>
-<p>  本实验通过搭建三层BP神经网络来解决字母T和L的识别问题。实验方案主要分为数据预处理，模型搭建以及训练识别三大模块。</p>
-<h4 id="数据预处理">1.1 数据预处理</h4>
-<p>  本次实验数据为上面的字母样本图，每个字母有4个样本，包括字母正常位置及旋转90°，180°和270°的图像。我们令黑方格为1，白方格为0，且按照下图1到9的顺序进行记录，得到数据集矩阵（一列代表一个样本，共八列）。并根据输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0来记录数据标签（八列，每列代表对应样本的输出）。</p>
-<img src="/2018/07/08/2018070817/18070802.png" class="clear" title="图2 样本记录顺序">
-<img src="/2018/07/08/2018070817/18070803.png" class="clear" title="图3 数据集矩阵（每列为一个样本）">
-<img src="/2018/07/08/2018070817/18070804.png" class="clear" title="图4 数据集标签（每列为一个标签）">
-<h4 id="模型搭建">1.2 模型搭建</h4>
-<p>  如图5所示为三层BP神经网络架构，其中第一层到第二层之间权值参数为<span class="math inline">\({W_1}\)</span>（大小为<span class="math inline">\(3\times 9\)</span>）和<span class="math inline">\({b_1}\)</span>（大小为<span class="math inline">\(3\times 1\)</span>），激活函数为<span class="math inline">\({f_1}(x)=\frac{2}{1+{e^{-\alpha x}}}-1\)</span>，第二层到第三层之间权值参数为<span class="math inline">\({W_2}\)</span>（大小为<span class="math inline">\(1\times 3\)</span>）和<span class="math inline">\({b_2}\)</span>（大小为<span class="math inline">\(1\times 1\)</span>），激活函数为<span class="math inline">\({f_2}(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span>，在最后为了输出0或1，增加一个门限函数<span class="math inline">\({f_3}(x)=\left\{ \begin{array} 0\ x&lt;0.5 \\ 1\ o.w. \end{array} \right.\)</span></p>
-<img src="/2018/07/08/2018070817/18070805.png" class="clear" title="图5 三层BP神经网络架构">
-<p>  搭建好上述模型后，使用BP算法计算梯度，反向传播算法步骤如下：</p>
-<p>1.计算前向传播的每个神经元的值，从层<span class="math inline">\({L_2}\)</span> , <span class="math inline">\({L_3}\)</span>,...直到输出层<span class="math inline">\({L_n}\)</span>。其中<span class="math inline">\(a_m^{(n+1)}=f(\sum\limits_{i}{W_{mi}^{(n)}a_i^{n}}+b_m^{(n)})\)</span></p>
-<p>2.对于输出层的节点，计算<span class="math inline">\(\delta _i^{nl}= \frac{\partial}{\partial z_i^{nl}}\frac{1}{2}\left\| {h_{W,b}}(x)-y \right\|^{2}=-(y_i-a_i^{nl})\cdot f&#39;(z_i^{nl})\)</span>。</p>
-<p>3.对于<span class="math inline">\(l=n_l-1,n_l-2,n_l-3,...,2\)</span>，对每个中间层的节点计算<span class="math inline">\(\delta _i^l=\left( \sum\limits_{j=1}^{s_{l+1}}{W_{ji}^l\delta _j^{l+1}} \right)\cdot f&#39;(z_i^l)\)</span> 。</p>
-<p>4.计算所需的偏导数，为以下两个表达式</p>
-<p><span class="math inline">\(\frac{\partial }{\partial W_{ij}^l}J(W,b)=a_j^l\delta _i^{l+1}\)</span></p>
-<p><span class="math inline">\(\frac{\partial }{\partial b_i^l}J(W,b)=\delta _i^{l+1}\)</span></p>
-<p>  反向传播算法如上所示。其实对于每个节点，它都是先计算相对于该节点的 “误差项”<span class="math inline">\(\delta _i^l\)</span> 。然后计算基于<span class="math inline">\(a_i^l\)</span> 的<span class="math inline">\(\delta _i^l\)</span>，并取其加权平均。 根据BP算法进行迭代，直到训练模型到代价函数取最小值。此时模型最优。其中本实验取得参数<span class="math inline">\(\alpha =1\)</span>。 本实验通过训练上述的八个样本，得到最优模型，然后依旧用这八个去检验输出结果，与其标签进行比较，得到识别率，结果如下。</p>
-<img src="/2018/07/08/2018070817/18070806.png" class="clear" title="图6 实验结果">
-<h3 id="实验结论">2 实验结论</h3>
-<p>  该实验通过搭建三层BP神经网络，通过数据预处理，模型搭建以及训练识别三大模块解决字母T和L的识别问题。最后用这八个样本去检验识别结果，与其标签进行比较，得到100%的识别率。</p>
+    <title>MIMO 信道容量推导</title>
+    <url>/2018/09/22/2018092215/</url>
+    <content><![CDATA[<p>MIMO (Multiple-Input Multiple-Output) 技术指在发射端和接收端分别使用多个发射天线和接收天线，使信号通过发射端与接收端的多个天线传送和接收的通信方式。与传统的SISO系统相比，MIMO系统充分地利用了空间分集，通过多个天线实现多发多收，在不增加频谱资源和天线发射功率的情况下，可以成倍的提高系统信道容量，是第四代移动通信的核心技术。其演进技术大规模MIMO (Massive MIMO)，被视为下一代移动通信技术的关键。<a id="more"></a></p>
+<h3 id="mimo系统模型">MIMO系统模型</h3>
+<p>设发射信号为<span class="math inline">\({x}\)</span>，则接收信号可以表示为</p>
+<p><span class="math display">\[
+\begin{align}
+\label{mod 1}
+y={\rm{H}}x+n,
+\end{align}
+\]</span></p>
+<p>其中<span class="math inline">\({y}\)</span>为接收信号，加性高斯白噪声<span class="math inline">\({n\sim\left(0,\sigma^2\rm{I}\right)}\)</span>。假设发送端天线数量为<span class="math inline">\({M_T}\)</span>，接收端天线数量为<span class="math inline">\({M_R}\)</span>，则可以改写为</p>
+<p><span class="math display">\[
+\begin{equation}
+    \label{mod 2}
+    \begin{bmatrix}
+    y_1\\
+    \vdots \\
+    y_{M_R}
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        h_{11}&amp; \cdots &amp;h_{1M_T}\\
+        \vdots &amp; \ddots &amp; \vdots \\
+        h_{M_R1}&amp; \cdots &amp;h_{M_RM_T}
+    \end{bmatrix}
+    \begin{bmatrix}
+        x_1\\
+        \vdots \\
+        x_{M_T}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        n_1\\
+        \vdots \\
+        n_{M_R}
+    \end{bmatrix}.
+\end{equation}
+\]</span></p>
+<p>式满足以下两个条件</p>
+<ol type="1">
+<li><p>接收信号数量<span class="math inline">\(&gt;\)</span>发射信号</p></li>
+<li><p>秩<span class="math inline">\(=\)</span>发射信号数</p></li>
+</ol>
+<p>且环境足够复杂，信道具有足够大的独立性。</p>
+<p>对发送信号，<span class="math inline">\(x_j\)</span>为0均值高斯变量，其形式为<span class="math inline">\(x=\left[x_1,\cdots,x_{M_T}\right]\)</span>，其协方差<span class="math inline">\(R_{xx}=E\left\{xx^H\right\}\)</span>，则总发射功率为<span class="math inline">\(P_T=tr\left(R_{xx}\right)\)</span>。</p>
+<p>对信道矩阵有</p>
+<p><span class="math display">\[
+\begin{align}
+\sum^{M_T}_{j=1}\lvert x\rvert=M_T,i=1,2,\cdots,M_R.
+\end{align}
+\]</span></p>
+<p>对接收端噪声，<span class="math inline">\(n\)</span>为独立的0均值复高斯随机变量，其中</p>
+<p><span class="math display">\[
+\begin{align}
+R_{nn}=E\left\{nn^H\right\},
+\end{align}
+\]</span></p>
+<p>若不相关，则有<span class="math inline">\(R_{nn}=\sigma^2I_{M_R}\)</span>。</p>
+<h3 id="mimo信道容量">MIMO信道容量</h3>
+<p>目前广泛采用的有两种推导方法，其一是根据香农公式得出的，另一种则是利用奇异值分解得出的，两种方法各自具有不同的优点，适用于不同环境。</p>
+<h4 id="香农公式法">香农公式法</h4>
+<p>在接收端，接收信号的协方差为</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+R_{yy} &amp; =E\left\{yy^H\right\}\\
+ &amp; =E\left\{({\rm{H}}x+n)({\rm{H}}x+n)^H\right\}\\
+ &amp; ={\rm{H}}E\left\{xx^H\right\}{\rm{H}}^H + E\left\{nn^H\right\} + {\rm{H}}E\left\{xn\right\} + {\rm{H}}^HE\left\{nx^H\right\}\\
+ &amp; ={\rm{H}}R_{xx}{\rm{H}}^H + \sigma^2I_{M_R}.
+\end{array}
+\]</span></p>
+<p>而信号<span class="math inline">\(x\)</span>与噪声<span class="math inline">\(n\)</span>不相关，故有<span class="math inline">\(E\left\{xn\right\}+E\left\{nx^H\right\}=0\)</span>。</p>
+<p>假设接收端已知信道矩阵<span class="math inline">\({\rm{H}}\)</span>，则瞬时信道容量可以写为</p>
+<p><span class="math display">\[
+\begin{align}
+C\left({\rm{H}}\right)=max_{f_X(x)}I\left(x,y\right),
+\end{align}
+\]</span></p>
+<p>其中，<span class="math inline">\(I\left(x,y\right)\)</span>为发射信号<span class="math inline">\(x\)</span>与接收信号<span class="math inline">\(y\)</span>间的互信息量，有</p>
+<p><span class="math display">\[
+\begin{align}
+I\left(x,y\right)=H\left(y\right)+H\left(y\mid x\right),
+\end{align}
+\]</span></p>
+<p>其中，<span class="math inline">\(H\left(y\right)=-\sum\left(y\right)log_2 p\left(y\right)\)</span>为<span class="math inline">\(y\)</span>的信息熵，<span class="math inline">\(p\left(y\right)\)</span>为<span class="math inline">\(y\)</span>的概率密度。<span class="math inline">\(H\left(y\mid x\right)\)</span>是给定<span class="math inline">\(x\)</span>条件下<span class="math inline">\(y\)</span>的差分熵。因为发射信号<span class="math inline">\(x\)</span>与噪声<span class="math inline">\(n\)</span>相互独立，故有<span class="math inline">\(H\left(y\mid x\right)=H\left(n\right)\)</span>，则上式可写为</p>
+<p><span class="math display">\[
+\begin{align}
+I\left(x,y\right)=H\left(y\right)+H\left(n\right),
+\end{align}
+\]</span></p>
+<p>在完美信道信息条件下，噪声的概率密度函数已知，故<span class="math inline">\(H\left(n\right)\)</span>为一常数。当信道为加性高斯信道时，发射信号与接收信号均服从高斯分布，此时<span class="math inline">\(I\left(x,y\right)\)</span>最大，为信道容量。则上式中有</p>
+<p><span class="math display">\[
+\begin{align}
+H\left(y\right)=\frac{1}{2}log_2\left\{det\left[\pi eR_{yy}\right]\right\}bit,
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align}
+H\left(n\right)=\frac{1}{2}log_2\left\{det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit.
+\end{align}
+\]</span></p>
+<p>则瞬时信道容量为</p>
+<p><span class="math display">\[
+\begin{array}{lll}
+C\left({\rm{H}}\right) &amp; =\frac{1}{2}log_2\left\{det\left[\pi eR_{yy}\right]/det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit\\
+ &amp; =\frac{1}{2}log_2\left\{det\left[\pi e\sigma^2I_{M_R}\left(I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right)\right]/det\left[\pi e\sigma^2I_{M_R}\right]\right\}bit\\
+ &amp; =\frac{1}{2}log_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]\right\}bit.\\
+\end{array}
+\]</span></p>
+<p>定义信道容量为一段时间内的平均互信息，则MIMO系统的信道容量为</p>
+<p><span class="math display">\[
+\begin{align}
+C=\frac{1}{T}C\left({\rm{H}}\right),
+\end{align}
+\]</span></p>
+<p>其中，<span class="math inline">\(T\)</span>为符号周期。考虑到采样定理，<span class="math inline">\(1/T\)</span>应大于两倍带宽<span class="math inline">\(B\)</span>，故取<span class="math inline">\(1/T=2B\)</span>，则有</p>
+<p><span class="math display">\[
+\begin{align}
+C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]\right\}bit/s
+\end{align}
+\]</span></p>
+<h4 id="奇异值分解法">奇异值分解法</h4>
+<p>持续更新中。。。</p>
+<p>注：本文公式推导部分来源于研究生课程《现代数字通信》，故本文不遵循文末的CC BY-NC-SA许可协议。</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
-        <tag>BP神经网络</tag>
-        <tag>识别</tag>
+        <tag>信道</tag>
+        <tag>MIMO</tag>
+        <tag>信道容量</tag>
       </tags>
   </entry>
   <entry>
@@ -590,9 +600,9 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>算法</category>
       </categories>
       <tags>
+        <tag>机器学习</tag>
         <tag>谓词逻辑</tag>
         <tag>猴子摘香蕉</tag>
-        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -630,6 +640,21 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <tag>装系统</tag>
         <tag>镜像</tag>
         <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Morocco</title>
+    <url>/2019/06/30/2019063008/</url>
+    <content><![CDATA[<img src="/2019/06/30/2019063008/19063001.jpg" class="">
+<a id="more"></a>
+<img src="/2019/06/30/2019063008/19063002.jpg" class="">
+<img src="/2019/06/30/2019063008/19063003.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>Morocco</tag>
       </tags>
   </entry>
   <entry>
@@ -684,61 +709,22 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>无人机</tag>
         <tag>信道</tag>
+        <tag>无人机</tag>
       </tags>
   </entry>
   <entry>
-    <title>移动通信网络的基本组成</title>
-    <url>/2018/04/19/2018041916/</url>
-    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<a id="more"></a></p>
-<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
-<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
-<h1 id="g网络的组成">3G网络的组成</h1>
-<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
-<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
-<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
-<h1 id="lte网络的组成">LTE网络的组成</h1>
-<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
-<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
-<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
-<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
-<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
+    <title>百里荒</title>
+    <url>/2020/05/15/2020051523/</url>
+    <content><![CDATA[<img src="/2020/05/15/2020051523/20200503.jpg" class="">
+<a id="more"></a>
+<img src="/2020/05/15/2020051523/20200504.jpg" class="">
 ]]></content>
       <categories>
-        <category>信息与通信工程</category>
+        <category>旅行</category>
       </categories>
       <tags>
-        <tag>移动通信</tag>
-        <tag>LTE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈芯片电源脚电容的取值问题</title>
-    <url>/2018/04/15/2018041521/</url>
-    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
-<h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
-<p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
-<p>一些PCB设计指导认为，在电源端放置一个1~10uF的电容来滤除低频噪声，在每个器件的电源与地之间放置一个0.01~0.1uF的电容来滤除高频噪声，显然这是从滤波的层面去考虑的。我们知道，电路要稳定可靠的运行，其电源一定要“干净”。所谓干净就是不能有杂波，在数字电路中，我们常常会看见FPGA的旁边和底面放置有大量的贴片电容，又如在模拟电路中，音乐发烧友总要在线性电源中放许多上千uF的大电容构建“大水塘”，这实际上就是为了滤除电源中的杂波。</p>
-<p>而去耦电容这一术语又是来形容什么的呢？顾名思义，用在退耦电路中的电容就是退耦电容，所谓退耦，就是为了防止电路中电流发生变化时，在供电电路中所形成的电流冲击对电路的正常工作产生影响。换言之，退耦电路能够有效的消除电路网络之间的寄生耦合。因此，退耦可以看作是滤波的一个小类。</p>
-<h2 id="滤波的取值问题">滤波的取值问题</h2>
-<p>搞清楚了什么是滤波，什么是退耦，我们接下来需要知道，为什么滤波电容总是要选择100nF和10uF。实际上上文所提到的“设计指导”已经描述了作为滤波时，电容的取值方法。而对于退耦，一些资料往往从储能的角度来谈，另一些则是从阻抗的角度来谈。储能理论认为：电容和负载同时跨接在电源两端，当负载电流不变时，其电流由稳压电源提供，此时电容两端电压与负载两端电压一致，且流过电容的电流为0。当负载瞬态电流发生变化时，由于负载芯片内部晶体管电平转换速度极快，必须在极短的时间内为负载芯片提供足够的电流，但是稳压电源无法很快响应负载电流的变化，因此负载芯片电压会降低。但是随着负载两端电压的降低，电容开始放电，为负载芯片提供电流。也就是说电容通过储存电能的方式为负载的瞬时电流提供了缓冲，使得负载两端的电压不发生显著变化，从而保证电路的正常运行。实际上，以上分析并没有什么卵用，他根本不能指导我们选用多大的电容，依据I=Cdv/dt，我们只知道C越大越好。因而有人提出了阻抗理论来指导我们选用电容。</p>
-<div class="note defult">
-            <p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
-          </div>
-<p>这段话来自一位业内专家，实际上它描述的是将电源和负载看作并联在一起构成的复合电源系统。该系统可以等效为电源与一个阻抗器件相串联，则退耦电容被认为是跨接在该系统的两端。我们知道ΔV=ΔI*z，为了保证负载两端的电压不发生较大的变化，也即复合电源系统两端的电压不发生较大的变化，我们需要使电容的阻抗尽可能的小，而电容的阻抗与容值由显式关系，因而根据器件的相关参数，我们可以通过计算得到退耦电容的取值。</p>
-<p>实际上，不论是储能还是阻抗都是相对理论化的解释，而我们常用的100nF和10uF则是真正的经验之谈。</p>
-<div class="note defult">
-            <p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
-          </div>
-<p>正如这位专家所言，随着电子行业的高速发展，电子产品行业链的分工越来越明确，定位和分工越来越细化，一般的电子产品公司已经不再参与电路设计，取而代之的是来自芯片厂商的一系列种类繁多的解决方案，有的厂商甚至提供多方面的筛选功能，从造价、占地面积、效率等等一系列方面提供了完备的筛选机制帮助设计人员找到最合适的电路设计。因而，正是由于这种职能转变，使得104被广泛应用，并逐渐成为业内的“设计规范”。</p>
-]]></content>
-      <categories>
-        <category>电路与系统</category>
-      </categories>
-      <tags>
-        <tag>退耦</tag>
-        <tag>滤波</tag>
+        <tag>百里荒</tag>
       </tags>
   </entry>
   <entry>
@@ -749,5 +735,19 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
       <categories>
         <category>杂谈</category>
       </categories>
+  </entry>
+  <entry>
+    <title>都江堰</title>
+    <url>/2020/05/15/2020051522/</url>
+    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
+<a id="more"></a>
+<img src="/2020/05/15/2020051522/20200502.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>都江堰</tag>
+      </tags>
   </entry>
 </search>
