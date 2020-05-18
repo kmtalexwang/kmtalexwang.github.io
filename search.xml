@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>都江堰</title>
-    <url>/2020/05/15/2020051522/</url>
-    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
-<a id="more"></a>
-<img src="/2020/05/15/2020051522/20200502.jpg" class="">
+    <title>与 Dr. Wei 合奏 Amazing Grace</title>
+    <url>/2020/05/18/2020051821/</url>
+    <content><![CDATA[<img src="/2020/05/18/2020051821/amazing.jpg" class="">
+<video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controls playsinline poster="">Sorry, your browser does not support the video tag.</video>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>音乐</category>
       </categories>
       <tags>
-        <tag>都江堰</tag>
+        <tag>哨笛</tag>
+        <tag>Amazing Grace</tag>
+        <tag>奇异恩典</tag>
+        <tag>长笛</tag>
+        <tag>演奏</tag>
+        <tag>合奏</tag>
       </tags>
   </entry>
   <entry>
@@ -82,6 +86,20 @@
       </categories>
       <tags>
         <tag>百里荒</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>都江堰</title>
+    <url>/2020/05/15/2020051522/</url>
+    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
+<a id="more"></a>
+<img src="/2020/05/15/2020051522/20200502.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>都江堰</tag>
       </tags>
   </entry>
   <entry>
@@ -418,8 +436,8 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>MIMO</tag>
         <tag>信道</tag>
+        <tag>MIMO</tag>
         <tag>信道容量</tag>
       </tags>
   </entry>
@@ -646,9 +664,9 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>算法</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
         <tag>谓词逻辑</tag>
         <tag>猴子摘香蕉</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
@@ -740,8 +758,8 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>信道</tag>
         <tag>无人机</tag>
+        <tag>信道</tag>
       </tags>
   </entry>
   <entry>
