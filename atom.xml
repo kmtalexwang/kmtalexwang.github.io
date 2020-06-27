@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Ruoxu的博客</title>
+  <title>Aurora</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kmtalexwang.github.io/"/>
-  <updated>2020-05-18T13:36:36.546Z</updated>
+  <updated>2020-06-27T07:15:00.078Z</updated>
   <id>https://kmtalexwang.github.io/</id>
   
   <author>
-    <name>Ruoxu Wang</name>
+    <name>Aurora</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>与 Dr. Wei 合奏 Amazing Grace</title>
+    <title>Amazing Grace</title>
     <link href="https://kmtalexwang.github.io/2020/05/18/2020051821/"/>
     <id>https://kmtalexwang.github.io/2020/05/18/2020051821/</id>
     <published>2020-05-18T13:10:56.000Z</published>
-    <updated>2020-05-18T13:36:36.546Z</updated>
+    <updated>2020-06-27T07:15:00.078Z</updated>
     
     <summary type="html">
     
@@ -29,8 +29,10 @@
       
         
         
-          &lt;img src=&quot;/2020/05/18/2020051821/amazing.jpg&quot; class=&quot;&quot;&gt;
-&lt;video src=&quot;/2020/05/18/2020051821/amazing.mp3&quot; preload=&quot;metadata&quot; controls
+          &lt;center&gt;
+和 BIT 的 Wei 博士合奏 Amazing Grace
+&lt;/center&gt;
+&lt;video src=&quot;/2020/05/18/2020051821/amazing.mp3&quot; preload=&quot;metadata&quot; controls playsinline
         
       
     
@@ -59,11 +61,11 @@
     <link href="https://kmtalexwang.github.io/2020/05/17/2020051716/"/>
     <id>https://kmtalexwang.github.io/2020/05/17/2020051716/</id>
     <published>2020-05-17T08:20:52.000Z</published>
-    <updated>2020-05-17T13:46:44.874Z</updated>
+    <updated>2020-06-27T07:15:38.202Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;去年冬天手术之后，在卧床休养之余，偶然瞥见歌手节目中的一种乐器十分有趣，就在淘宝购入了一把略作尝试。这个乐器就是哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。
+      &lt;p&gt;哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。
     
     </summary>
     
@@ -184,9 +186,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="RSRP" scheme="https://kmtalexwang.github.io/tags/RSRP/"/>
-    
       <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
+    
+      <category term="RSRP" scheme="https://kmtalexwang.github.io/tags/RSRP/"/>
     
   </entry>
   
@@ -207,9 +209,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
-    
       <category term="MIMO" scheme="https://kmtalexwang.github.io/tags/MIMO/"/>
+    
+      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
     
       <category term="信道容量" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93%E5%AE%B9%E9%87%8F/"/>
     
@@ -280,11 +282,11 @@
       <category term="算法" scheme="https://kmtalexwang.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
       <category term="谓词逻辑" scheme="https://kmtalexwang.github.io/tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91/"/>
     
       <category term="猴子摘香蕉" scheme="https://kmtalexwang.github.io/tags/%E7%8C%B4%E5%AD%90%E6%91%98%E9%A6%99%E8%95%89/"/>
+    
+      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   

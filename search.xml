@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>与 Dr. Wei 合奏 Amazing Grace</title>
+    <title>Amazing Grace</title>
     <url>/2020/05/18/2020051821/</url>
-    <content><![CDATA[<img src="/2020/05/18/2020051821/amazing.jpg" class="">
+    <content><![CDATA[<center>
+和 BIT 的 Wei 博士合奏 Amazing Grace
+</center>
 <video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controls playsinline poster="">Sorry, your browser does not support the video tag.</video>
 ]]></content>
       <categories>
@@ -21,7 +23,7 @@
   <entry>
     <title>浅谈PVC哨笛的制作</title>
     <url>/2020/05/17/2020051716/</url>
-    <content><![CDATA[<p>去年冬天手术之后，在卧床休养之余，偶然瞥见歌手节目中的一种乐器十分有趣，就在淘宝购入了一把略作尝试。这个乐器就是哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。<a id="more"></a></p>
+    <content><![CDATA[<p>哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。<a id="more"></a></p>
 <img src="/2020/05/17/2020051716/20200505.jpg" class="" width="272">
 <p>这把由制笛大师一叶之舟改进的飞叨哨笛为高音D调，其指法与竹笛无异，但定调的方法与竹笛不同，为全按时定调，而竹笛则为开三孔时定调。那么，按照竹笛的定调方法，这把哨笛就是G调了。拿到这把哨笛，我就迫不及待地演奏了一些简单曲目，例如Long Long Ago，欢乐颂，爱尔兰画眉。稍作尝试，便觉这把塑料笛头套接黄铜笛身的飞叨哨笛音色清脆、甜美，但与我之前玩过的布鲁斯口琴相比实在是太难控制。即使一叶大师对笛头进行了修改使其不易破音，但在吹奏时仍需控制好气息才能发挥这把琴的完美音色，可见哨笛对演奏者的气息控制能力要求非常高。</p>
 <p>今年年初，一场罕见的传染病大爆发肆虐了我国，为了响应国家号召，为自己负责、为他人负责、为社会负责，我一直呆在家中完成毕业论文。闲暇之余，我便拿起放假前邮回家的一把降B调世代黄铜哨笛吹一吹。这把笛子与飞叨D均属于塑料笛头套金属笛身的廉价哨笛，但从外观上看较飞叨D更粗更长、指距更大，且吹起来更加难以控制。我选择这把笛为我的第二把哨笛，主要是因为著名的《泰坦尼克号》主题曲《我心永恒》的前奏就是出自这把哨笛，且有大量网友为之站台，想必这把哨笛的音质绝对是顶级的。但是，当我尝试演奏时，它的音色却令我大失所望。我尝试按照一叶之舟大师和国外制笛大师弗里曼的方法用潮湿的卫生纸堵住笛头的一处塑料缺口，但效果并不明显。直到我吹过低音D哨笛后，我才发现这把笛子的正确演奏方法。在正确应用气息后，这把哨笛也同样发挥出了它优秀的音色。但是，我的飞叨D仍然留在学校，这也就萌生了我制作一把哨笛的想法。</p>
@@ -302,8 +304,8 @@
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>RSRP</tag>
         <tag>信道</tag>
+        <tag>RSRP</tag>
       </tags>
   </entry>
   <entry>
@@ -436,8 +438,8 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>信道</tag>
         <tag>MIMO</tag>
+        <tag>信道</tag>
         <tag>信道容量</tag>
       </tags>
   </entry>
@@ -664,9 +666,9 @@ C=Blog_2\left\{det\left[I_{M_R}+\frac{\text{H}R_{xx}\text{H}^H}{\sigma^2}\right]
         <category>算法</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
         <tag>谓词逻辑</tag>
         <tag>猴子摘香蕉</tag>
+        <tag>机器学习</tag>
       </tags>
   </entry>
   <entry>
