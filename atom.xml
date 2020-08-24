@@ -174,7 +174,7 @@
     <link href="https://kmtalexwang.github.io/2019/01/23/2019012300/"/>
     <id>https://kmtalexwang.github.io/2019/01/23/2019012300/</id>
     <published>2019-01-22T16:33:12.000Z</published>
-    <updated>2020-04-15T06:56:48.664Z</updated>
+    <updated>2020-08-24T06:25:15.907Z</updated>
     
     <summary type="html">
     
@@ -186,9 +186,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
-    
       <category term="RSRP" scheme="https://kmtalexwang.github.io/tags/RSRP/"/>
+    
+      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
     
   </entry>
   
@@ -209,9 +209,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="MIMO" scheme="https://kmtalexwang.github.io/tags/MIMO/"/>
-    
       <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
+    
+      <category term="MIMO" scheme="https://kmtalexwang.github.io/tags/MIMO/"/>
     
       <category term="信道容量" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93%E5%AE%B9%E9%87%8F/"/>
     

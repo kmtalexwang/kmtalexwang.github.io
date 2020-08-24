@@ -13,10 +13,12 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
 
-<script id="hexo-configurations">
+<script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"kmtalexwang.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"kmtalexwang.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"path":"search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
   <meta name="description" content="不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么">
@@ -36,7 +38,7 @@
 <link rel="canonical" href="https://kmtalexwang.github.io/2018/04/15/2018041521/">
 
 
-<script id="page-configurations">
+<script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -65,24 +67,36 @@
 
   <noscript>
   <style>
-  .use-motion .brand,
+  body { margin-top: 2rem; }
+
   .use-motion .menu-item,
-  .sidebar-inner,
+  .use-motion .sidebar,
   .use-motion .post-block,
   .use-motion .pagination,
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
 
   .use-motion .site-title,
-  .use-motion .site-subtitle {
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
     opacity: initial;
     top: initial;
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
   </style>
 </noscript>
 
@@ -93,22 +107,23 @@
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
     <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
+      <i class="logo-line"></i>
       <h1 class="site-title">Aurora</h1>
-      <span class="logo-line-after"><i></i></span>
+      <i class="logo-line"></i>
     </a>
   </div>
 
@@ -121,7 +136,6 @@
 
 
 
-
 <nav class="site-nav">
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
@@ -131,17 +145,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">34</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -170,7 +184,7 @@
     <i class="fa fa-search"></i>
   </span>
   <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
            placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
@@ -180,7 +194,7 @@
 </div>
 <div id="search-result">
   <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>
 
@@ -188,22 +202,122 @@
   </div>
 
 </div>
-    </header>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
 
-    
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是滤波退耦"><span class="nav-number">1.</span> <span class="nav-text">什么是滤波、退耦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滤波的取值问题"><span class="nav-number">2.</span> <span class="nav-text">滤波的取值问题</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Aurora"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Aurora</p>
+  <div class="site-description" itemprop="description">a painter</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/kmtalexwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kmtalexwang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/u/3885461712" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3885461712" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/hao/" title="&#x2F;hao&#x2F;">网址导航</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/wang__rongwei" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wang__rongwei" rel="noopener" target="_blank">wang__rongwei的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iwork2013.cn/" title="https:&#x2F;&#x2F;iwork2013.cn&#x2F;" rel="noopener" target="_blank">iwork2013</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://leesen998.github.io/" title="https:&#x2F;&#x2F;leesen998.github.io&#x2F;" rel="noopener" target="_blank">QJun</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/lichuan0987" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;lichuan0987" rel="noopener" target="_blank">lichuan0987</a>
+        </li>
+    </ul>
+  </div>
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
   <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
+
       <div class="main-inner">
-        <div class="content-wrap">
-          
+        
 
-          <div class="content post posts-expand">
-            
+        <div class="content post posts-expand">
+          
 
     
   
@@ -220,6 +334,8 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Aurora">
     </span>
+
+    
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           浅谈芯片电源脚电容的取值问题
@@ -276,8 +392,6 @@
     
     
     <div class="post-body" itemprop="articleBody">
-
-      
         <p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
 <h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
 <p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
@@ -285,14 +399,18 @@
 <p>而去耦电容这一术语又是来形容什么的呢？顾名思义，用在退耦电路中的电容就是退耦电容，所谓退耦，就是为了防止电路中电流发生变化时，在供电电路中所形成的电流冲击对电路的正常工作产生影响。换言之，退耦电路能够有效的消除电路网络之间的寄生耦合。因此，退耦可以看作是滤波的一个小类。</p>
 <h2 id="滤波的取值问题">滤波的取值问题</h2>
 <p>搞清楚了什么是滤波，什么是退耦，我们接下来需要知道，为什么滤波电容总是要选择100nF和10uF。实际上上文所提到的“设计指导”已经描述了作为滤波时，电容的取值方法。而对于退耦，一些资料往往从储能的角度来谈，另一些则是从阻抗的角度来谈。储能理论认为：电容和负载同时跨接在电源两端，当负载电流不变时，其电流由稳压电源提供，此时电容两端电压与负载两端电压一致，且流过电容的电流为0。当负载瞬态电流发生变化时，由于负载芯片内部晶体管电平转换速度极快，必须在极短的时间内为负载芯片提供足够的电流，但是稳压电源无法很快响应负载电流的变化，因此负载芯片电压会降低。但是随着负载两端电压的降低，电容开始放电，为负载芯片提供电流。也就是说电容通过储存电能的方式为负载的瞬时电流提供了缓冲，使得负载两端的电压不发生显著变化，从而保证电路的正常运行。实际上，以上分析并没有什么卵用，他根本不能指导我们选用多大的电容，依据I=Cdv/dt，我们只知道C越大越好。因而有人提出了阻抗理论来指导我们选用电容。</p>
-<div class="note defult">
-            <p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
-          </div>
+<details class="note "><summary><p>defult</p>
+</summary>
+<p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
+
+</details>
 <p>这段话来自一位业内专家，实际上它描述的是将电源和负载看作并联在一起构成的复合电源系统。该系统可以等效为电源与一个阻抗器件相串联，则退耦电容被认为是跨接在该系统的两端。我们知道ΔV=ΔI*z，为了保证负载两端的电压不发生较大的变化，也即复合电源系统两端的电压不发生较大的变化，我们需要使电容的阻抗尽可能的小，而电容的阻抗与容值由显式关系，因而根据器件的相关参数，我们可以通过计算得到退耦电容的取值。</p>
 <p>实际上，不论是储能还是阻抗都是相对理论化的解释，而我们常用的100nF和10uF则是真正的经验之谈。</p>
-<div class="note defult">
-            <p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
-          </div>
+<details class="note "><summary><p>defult</p>
+</summary>
+<p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
+
+</details>
 <p>正如这位专家所言，随着电子行业的高速发展，电子产品行业链的分工越来越明确，定位和分工越来越细化，一般的电子产品公司已经不再参与电路设计，取而代之的是来自芯片厂商的一系列种类繁多的解决方案，有的厂商甚至提供多方面的筛选功能，从造价、占地面积、效率等等一系列方面提供了完备的筛选机制帮助设计人员找到最合适的电路设计。因而，正是由于这种职能转变，使得104被广泛应用，并逐渐成为业内的“设计规范”。</p>
 
     </div>
@@ -347,8 +465,8 @@
 
 
 
-          </div>
-          
+        </div>
+        
     
   <div class="comments">
     <div id="disqus_thread">
@@ -379,106 +497,6 @@
   }
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是滤波退耦"><span class="nav-number">1.</span> <span class="nav-text">什么是滤波、退耦</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滤波的取值问题"><span class="nav-number">2.</span> <span class="nav-text">滤波的取值问题</span></a></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Aurora"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">Aurora</p>
-  <div class="site-description" itemprop="description">a painter</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">16</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">7</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">34</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/kmtalexwang" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;kmtalexwang" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://weibo.com/u/3885461712" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;u&#x2F;3885461712" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
-
-
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="/hao/" title="&#x2F;hao&#x2F;">网址导航</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://blog.csdn.net/wang__rongwei" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;wang__rongwei" rel="noopener" target="_blank">wang__rongwei的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://iwork2013.cn/" title="https:&#x2F;&#x2F;iwork2013.cn&#x2F;" rel="noopener" target="_blank">iwork2013</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://leesen998.github.io/" title="https:&#x2F;&#x2F;leesen998.github.io&#x2F;" rel="noopener" target="_blank">QJun</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://blog.csdn.net/lichuan0987" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;lichuan0987" rel="noopener" target="_blank">lichuan0987</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
       </div>
     </main>
 
@@ -497,7 +515,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Aurora</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
         
@@ -515,20 +533,13 @@
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
 <script src="/js/utils.js"></script>
 
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/pisces.js"></script>
-
-
 <script src="/js/next-boot.js"></script>
-
-
 
 
   
@@ -573,7 +584,7 @@
     this.page.identifier = "2018/04/15/2018041521/";
     this.page.title = "浅谈芯片电源脚电容的取值问题";
     };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+  NexT.utils.loadComments('#disqus_thread', () => {
     if (window.DISQUS) {
       DISQUS.reset({
         reload: true,
