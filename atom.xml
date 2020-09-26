@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://kmtalexwang.github.io/"/>
-  <updated>2020-06-27T07:15:00.078Z</updated>
+  <updated>2020-09-26T15:11:12.984Z</updated>
   <id>https://kmtalexwang.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://kmtalexwang.github.io/2020/05/18/2020051821/"/>
     <id>https://kmtalexwang.github.io/2020/05/18/2020051821/</id>
     <published>2020-05-18T13:10:56.000Z</published>
-    <updated>2020-06-27T07:15:00.078Z</updated>
+    <updated>2020-09-26T15:11:12.984Z</updated>
     
     <summary type="html">
     
@@ -42,11 +42,11 @@
       <category term="音乐" scheme="https://kmtalexwang.github.io/categories/%E9%9F%B3%E4%B9%90/"/>
     
     
-      <category term="哨笛" scheme="https://kmtalexwang.github.io/tags/%E5%93%A8%E7%AC%9B/"/>
-    
       <category term="Amazing Grace" scheme="https://kmtalexwang.github.io/tags/Amazing-Grace/"/>
     
       <category term="奇异恩典" scheme="https://kmtalexwang.github.io/tags/%E5%A5%87%E5%BC%82%E6%81%A9%E5%85%B8/"/>
+    
+      <category term="哨笛" scheme="https://kmtalexwang.github.io/tags/%E5%93%A8%E7%AC%9B/"/>
     
       <category term="长笛" scheme="https://kmtalexwang.github.io/tags/%E9%95%BF%E7%AC%9B/"/>
     
@@ -186,9 +186,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="RSRP" scheme="https://kmtalexwang.github.io/tags/RSRP/"/>
-    
       <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
+    
+      <category term="RSRP" scheme="https://kmtalexwang.github.io/tags/RSRP/"/>
     
   </entry>
   
@@ -197,7 +197,7 @@
     <link href="https://kmtalexwang.github.io/2018/09/22/2018092215/"/>
     <id>https://kmtalexwang.github.io/2018/09/22/2018092215/</id>
     <published>2018-09-22T07:56:00.000Z</published>
-    <updated>2020-05-15T14:25:02.636Z</updated>
+    <updated>2020-09-26T15:12:44.799Z</updated>
     
     <summary type="html">
     
@@ -282,11 +282,11 @@
       <category term="算法" scheme="https://kmtalexwang.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
       <category term="谓词逻辑" scheme="https://kmtalexwang.github.io/tags/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91/"/>
     
       <category term="猴子摘香蕉" scheme="https://kmtalexwang.github.io/tags/%E7%8C%B4%E5%AD%90%E6%91%98%E9%A6%99%E8%95%89/"/>
-    
-      <category term="机器学习" scheme="https://kmtalexwang.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
@@ -334,9 +334,9 @@
       <category term="信息与通信工程" scheme="https://kmtalexwang.github.io/categories/%E4%BF%A1%E6%81%AF%E4%B8%8E%E9%80%9A%E4%BF%A1%E5%B7%A5%E7%A8%8B/"/>
     
     
-      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
-    
       <category term="无人机" scheme="https://kmtalexwang.github.io/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/"/>
+    
+      <category term="信道" scheme="https://kmtalexwang.github.io/tags/%E4%BF%A1%E9%81%93/"/>
     
   </entry>
   
