@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>移动通信网络的基本组成</title>
+    <url>/2018/04/19/2018041916/</url>
+    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<a id="more"></a></p>
+<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
+<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
+<h1 id="g网络的组成">3G网络的组成</h1>
+<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
+<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
+<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
+<h1 id="lte网络的组成">LTE网络的组成</h1>
+<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
+<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
+<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
+<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
+<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
+]]></content>
+      <categories>
+        <category>信息与通信工程</category>
+      </categories>
+      <tags>
+        <tag>移动通信</tag>
+        <tag>LTE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一种常用的无人机信道路径损耗模型</title>
     <url>/2018/04/30/2018043016/</url>
     <content><![CDATA[<p>根据《中华人民共和国无线电频率划分规定》及我国频谱使用情况，工信部规定了用于无人驾驶航空器系统的频段为840.5 - 845MHz、1430 - 1444MHz和2408 - 2440MHz。与传统的星地链路不同的是，无人机的飞行高度有限，卫星通信的信号一般要经过对流层、平流层、电离层和外层空间，其跨越距离大，因而影响信号传播的因素很多，通常采用的建模方法是阴影莱斯衰落模型。<a id="more"></a>今年一月份，民航总局对外发布了《关于征求《无人驾驶航空器飞行管理暂行条例（征求意见稿）》意见的通知》（下文简称《通知》），《通知》精神根据无人机运行风险大小，将民用无人机分为微型、轻型、小型、中型、大型等五个类型，其中：</p>
@@ -96,141 +121,114 @@
       </tags>
   </entry>
   <entry>
-    <title>阻容封装知识</title>
-    <url>/2018/08/05/2018080522/</url>
-    <content><![CDATA[<p>这里给出一些常用封装的说明<a id="more"></a></p>
-<h3 id="电阻">电阻</h3>
-<ol type="1">
-<li>直插封装：AXIAL，例如AXIAL-0.4，数字表示焊盘间距，该封装表示1/4W直插电阻。</li>
-<li>贴片封装：四位数字，例如0805，表示常用1/8W贴片电阻。</li>
-</ol>
-<h4 style="text-align: center">
-表1 贴片电阻功率对照表
-</h4>
+    <title>RSRP 你搞懂了吗？</title>
+    <url>/2019/01/23/2019012300/</url>
+    <content><![CDATA[<p>RSRP，RSRQ，RSSI等等这些概念非常相似，背后的意义和关键指标也让人摸不着头脑，这里给出了RSRP的相关知识。<a id="more"></a></p>
+<img src="/2019/01/23/2019012300/2019012301.jpg" class="" width="300">
+<h3 id="我的手机信号从没满格过咋肥四鸭">我的手机信号从没满格过，咋肥四鸭？</h3>
+<p>——别问我，问你的运营商去。</p>
+<p>用户经常抱怨信号不好，这里信号一词的定义却非常模糊。3GPP所给出的标准36.211、36.214将参考信号接收功率（RSRP）定义为考虑的测量频率带宽上承载参考信号的资源元素（RE）上的接收功率（以W为单位）的线性平均值，简单的理解就是用户终端接收到来自基站发送的参考信号的功率。那么“信号不好”这个概念就可以直观的认为是RSRP太低了。</p>
+<h3 id="rsrp事咋算的呀">RSRP事咋算的呀？</h3>
+<p>——别问我，问专家去。</p>
+<p>实际上，我也没查到3GPP给出的RSRP的计算表达式，如果有兴趣可以阅读36.211，这个写的非常详细，但唯独没有给出计算表达式，但RSRP与覆盖强度大概是如下关系。</p>
 <table>
 <thead>
 <tr class="header">
-<th>型号</th>
-<th>功率</th>
+<th>RSRP(dBm)</th>
+<th>覆盖强度级别</th>
+<th>备注</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>0201</td>
-<td>1/20W</td>
+<td>Rx&lt;= -105</td>
+<td>覆盖强度等级6</td>
+<td>覆盖较差。业务基本无法起呼。</td>
 </tr>
 <tr class="even">
-<td>0402</td>
-<td>1/16W</td>
+<td>-105&lt;Rx&lt;=-95</td>
+<td>覆盖强度等级5</td>
+<td>覆盖差。室外语音业务能够起呼，但呼叫成功率低，掉话率高。室内业务基本无法发起业务。</td>
 </tr>
 <tr class="odd">
-<td>0603</td>
-<td>1/10W</td>
+<td>-95&lt;Rx&lt;=-85</td>
+<td>覆盖强度等级4</td>
+<td>覆盖一般，室外能够发起各种业务，可获得低速率的数据业务。但室内呼叫成功率低，掉话率高。</td>
 </tr>
 <tr class="even">
-<td>0805</td>
-<td>1/8W</td>
+<td>-85&lt;Rx&lt;=-75</td>
+<td>覆盖强度等级3</td>
+<td>覆盖较好，室外能够发起各种业务，可获得中等速率的数据业务。室内能发起各种业务，可获得低速率数据业务。</td>
 </tr>
 <tr class="odd">
-<td>1206</td>
-<td>1/4W</td>
+<td>-75&lt;Rx&lt;=-65</td>
+<td>覆盖强度等级2</td>
+<td>覆盖好，室外能够发起各种业务可获得高速率的数据业务。室内能发起各种业务，可获得中等速率数据业务。</td>
+</tr>
+<tr class="even">
+<td>Rx&gt;-65</td>
+<td>覆盖强度等级1</td>
+<td>覆盖非常好。</td>
 </tr>
 </tbody>
 </table>
-<h4 style="text-align: center">
-表2 贴片电阻尺寸对照表
-</h4>
+<p>这里，我们主要关注36.133给出的一个关系，即</p>
 <table>
 <thead>
 <tr class="header">
-<th>型号</th>
-<th>尺寸</th>
+<th>Reported value</th>
+<th>Measured quantity</th>
+<th>value Unit</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>0402</td>
-<td>1.0x0.5</td>
+<td>RSRP_00</td>
+<td>RSRP &gt; -140</td>
+<td>dBm</td>
 </tr>
 <tr class="even">
-<td>0603</td>
-<td>1.6x0.8</td>
+<td>RSRP_01</td>
+<td>-140 &lt; RSRP &lt; -139</td>
+<td>dBm</td>
 </tr>
 <tr class="odd">
-<td>0805</td>
-<td>2.0x1.2</td>
+<td>RSRP_02</td>
+<td>-139 &lt; RSRP &lt; -138</td>
+<td>dBm</td>
 </tr>
 <tr class="even">
-<td>1206</td>
-<td>3.2x1.6</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
 </tr>
 <tr class="odd">
-<td>1210</td>
-<td>3.2x2.5</td>
+<td>RSRP_95</td>
+<td>-46 &lt; RSRP &lt; -45</td>
+<td>dBm</td>
 </tr>
 <tr class="even">
-<td>1812</td>
-<td>4.5x3.2</td>
+<td>RSRP_96</td>
+<td>-45 &lt; RSRP &lt; -44</td>
+<td>dBm</td>
 </tr>
 <tr class="odd">
-<td>2225</td>
-<td>5.6x6.5</td>
+<td>RSRP_97</td>
+<td>-44 &lt; RSRP</td>
+<td>dBm</td>
 </tr>
 </tbody>
 </table>
-<h3 id="电容">电容</h3>
-<ol type="1">
-<li>直插封装：轴向（axial），即电容器在管脚轴上；径向（radial），即电容器两管脚在同一侧。</li>
-<li>贴片封装：贴片电容尺寸与贴片电阻尺寸相似。</li>
-</ol>
-<h4 style="text-align: center">
-表3 贴片电容尺寸对照表
-</h4>
-<table>
-<thead>
-<tr class="header">
-<th>型号</th>
-<th>尺寸</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0402</td>
-<td>1.0x0.5</td>
-</tr>
-<tr class="even">
-<td>0603</td>
-<td>1.6x0.8</td>
-</tr>
-<tr class="odd">
-<td>0805</td>
-<td>2.0x1.2</td>
-</tr>
-<tr class="even">
-<td>1206</td>
-<td>3.2x1.6</td>
-</tr>
-<tr class="odd">
-<td>1210</td>
-<td>3.2x2.5</td>
-</tr>
-<tr class="even">
-<td>1812</td>
-<td>4.5x3.2</td>
-</tr>
-<tr class="odd">
-<td>2225</td>
-<td>5.6x6.5</td>
-</tr>
-</tbody>
-</table>
+<p>其表达式为</p>
+<p><strong><em>RSRP质量（负） = RSRP测量报告值（正）-140</em></strong></p>
+<p>这个计算式反映了RSRP测量报告值与RSRP质量之间的关系。</p>
 ]]></content>
       <categories>
-        <category>电路与系统</category>
+        <category>信息与通信工程</category>
       </categories>
       <tags>
-        <tag>电子元件</tag>
-        <tag>封装</tag>
+        <tag>信道</tag>
+        <tag>RSRP</tag>
       </tags>
   </entry>
   <entry>
@@ -419,117 +417,6 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
-    <title>RSRP 你搞懂了吗？</title>
-    <url>/2019/01/23/2019012300/</url>
-    <content><![CDATA[<p>RSRP，RSRQ，RSSI等等这些概念非常相似，背后的意义和关键指标也让人摸不着头脑，这里给出了RSRP的相关知识。<a id="more"></a></p>
-<img src="/2019/01/23/2019012300/2019012301.jpg" class="" width="300">
-<h3 id="我的手机信号从没满格过咋肥四鸭">我的手机信号从没满格过，咋肥四鸭？</h3>
-<p>——别问我，问你的运营商去。</p>
-<p>用户经常抱怨信号不好，这里信号一词的定义却非常模糊。3GPP所给出的标准36.211、36.214将参考信号接收功率（RSRP）定义为考虑的测量频率带宽上承载参考信号的资源元素（RE）上的接收功率（以W为单位）的线性平均值，简单的理解就是用户终端接收到来自基站发送的参考信号的功率。那么“信号不好”这个概念就可以直观的认为是RSRP太低了。</p>
-<h3 id="rsrp事咋算的呀">RSRP事咋算的呀？</h3>
-<p>——别问我，问专家去。</p>
-<p>实际上，我也没查到3GPP给出的RSRP的计算表达式，如果有兴趣可以阅读36.211，这个写的非常详细，但唯独没有给出计算表达式，但RSRP与覆盖强度大概是如下关系。</p>
-<table>
-<thead>
-<tr class="header">
-<th>RSRP(dBm)</th>
-<th>覆盖强度级别</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Rx&lt;= -105</td>
-<td>覆盖强度等级6</td>
-<td>覆盖较差。业务基本无法起呼。</td>
-</tr>
-<tr class="even">
-<td>-105&lt;Rx&lt;=-95</td>
-<td>覆盖强度等级5</td>
-<td>覆盖差。室外语音业务能够起呼，但呼叫成功率低，掉话率高。室内业务基本无法发起业务。</td>
-</tr>
-<tr class="odd">
-<td>-95&lt;Rx&lt;=-85</td>
-<td>覆盖强度等级4</td>
-<td>覆盖一般，室外能够发起各种业务，可获得低速率的数据业务。但室内呼叫成功率低，掉话率高。</td>
-</tr>
-<tr class="even">
-<td>-85&lt;Rx&lt;=-75</td>
-<td>覆盖强度等级3</td>
-<td>覆盖较好，室外能够发起各种业务，可获得中等速率的数据业务。室内能发起各种业务，可获得低速率数据业务。</td>
-</tr>
-<tr class="odd">
-<td>-75&lt;Rx&lt;=-65</td>
-<td>覆盖强度等级2</td>
-<td>覆盖好，室外能够发起各种业务可获得高速率的数据业务。室内能发起各种业务，可获得中等速率数据业务。</td>
-</tr>
-<tr class="even">
-<td>Rx&gt;-65</td>
-<td>覆盖强度等级1</td>
-<td>覆盖非常好。</td>
-</tr>
-</tbody>
-</table>
-<p>这里，我们主要关注36.133给出的一个关系，即</p>
-<table>
-<thead>
-<tr class="header">
-<th>Reported value</th>
-<th>Measured quantity</th>
-<th>value Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RSRP_00</td>
-<td>RSRP &gt; -140</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>RSRP_01</td>
-<td>-140 &lt; RSRP &lt; -139</td>
-<td>dBm</td>
-</tr>
-<tr class="odd">
-<td>RSRP_02</td>
-<td>-139 &lt; RSRP &lt; -138</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr class="odd">
-<td>RSRP_95</td>
-<td>-46 &lt; RSRP &lt; -45</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>RSRP_96</td>
-<td>-45 &lt; RSRP &lt; -44</td>
-<td>dBm</td>
-</tr>
-<tr class="odd">
-<td>RSRP_97</td>
-<td>-44 &lt; RSRP</td>
-<td>dBm</td>
-</tr>
-</tbody>
-</table>
-<p>其表达式为</p>
-<p><strong><em>RSRP质量（负） = RSRP测量报告值（正）-140</em></strong></p>
-<p>这个计算式反映了RSRP测量报告值与RSRP质量之间的关系。</p>
-]]></content>
-      <categories>
-        <category>信息与通信工程</category>
-      </categories>
-      <tags>
-        <tag>信道</tag>
-        <tag>RSRP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux bash下如何运行Matlab程序</title>
     <url>/2019/04/28/2019042819/</url>
     <content><![CDATA[<p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。<a id="more"></a></p>
@@ -609,35 +496,141 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
-    <title>浅谈芯片电源脚电容的取值问题</title>
-    <url>/2018/04/15/2018041521/</url>
-    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
-<h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
-<p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
-<p>一些PCB设计指导认为，在电源端放置一个1~10uF的电容来滤除低频噪声，在每个器件的电源与地之间放置一个0.01~0.1uF的电容来滤除高频噪声，显然这是从滤波的层面去考虑的。我们知道，电路要稳定可靠的运行，其电源一定要“干净”。所谓干净就是不能有杂波，在数字电路中，我们常常会看见FPGA的旁边和底面放置有大量的贴片电容，又如在模拟电路中，音乐发烧友总要在线性电源中放许多上千uF的大电容构建“大水塘”，这实际上就是为了滤除电源中的杂波。</p>
-<p>而去耦电容这一术语又是来形容什么的呢？顾名思义，用在退耦电路中的电容就是退耦电容，所谓退耦，就是为了防止电路中电流发生变化时，在供电电路中所形成的电流冲击对电路的正常工作产生影响。换言之，退耦电路能够有效的消除电路网络之间的寄生耦合。因此，退耦可以看作是滤波的一个小类。</p>
-<h2 id="滤波的取值问题">滤波的取值问题</h2>
-<p>搞清楚了什么是滤波，什么是退耦，我们接下来需要知道，为什么滤波电容总是要选择100nF和10uF。实际上上文所提到的“设计指导”已经描述了作为滤波时，电容的取值方法。而对于退耦，一些资料往往从储能的角度来谈，另一些则是从阻抗的角度来谈。储能理论认为：电容和负载同时跨接在电源两端，当负载电流不变时，其电流由稳压电源提供，此时电容两端电压与负载两端电压一致，且流过电容的电流为0。当负载瞬态电流发生变化时，由于负载芯片内部晶体管电平转换速度极快，必须在极短的时间内为负载芯片提供足够的电流，但是稳压电源无法很快响应负载电流的变化，因此负载芯片电压会降低。但是随着负载两端电压的降低，电容开始放电，为负载芯片提供电流。也就是说电容通过储存电能的方式为负载的瞬时电流提供了缓冲，使得负载两端的电压不发生显著变化，从而保证电路的正常运行。实际上，以上分析并没有什么卵用，他根本不能指导我们选用多大的电容，依据I=Cdv/dt，我们只知道C越大越好。因而有人提出了阻抗理论来指导我们选用电容。</p>
-<details class="note "><summary><p>defult</p>
-</summary>
-<p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
-
-</details>
-<p>这段话来自一位业内专家，实际上它描述的是将电源和负载看作并联在一起构成的复合电源系统。该系统可以等效为电源与一个阻抗器件相串联，则退耦电容被认为是跨接在该系统的两端。我们知道ΔV=ΔI*z，为了保证负载两端的电压不发生较大的变化，也即复合电源系统两端的电压不发生较大的变化，我们需要使电容的阻抗尽可能的小，而电容的阻抗与容值由显式关系，因而根据器件的相关参数，我们可以通过计算得到退耦电容的取值。</p>
-<p>实际上，不论是储能还是阻抗都是相对理论化的解释，而我们常用的100nF和10uF则是真正的经验之谈。</p>
-<details class="note "><summary><p>defult</p>
-</summary>
-<p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
-
-</details>
-<p>正如这位专家所言，随着电子行业的高速发展，电子产品行业链的分工越来越明确，定位和分工越来越细化，一般的电子产品公司已经不再参与电路设计，取而代之的是来自芯片厂商的一系列种类繁多的解决方案，有的厂商甚至提供多方面的筛选功能，从造价、占地面积、效率等等一系列方面提供了完备的筛选机制帮助设计人员找到最合适的电路设计。因而，正是由于这种职能转变，使得104被广泛应用，并逐渐成为业内的“设计规范”。</p>
+    <title>阻容封装知识</title>
+    <url>/2018/08/05/2018080522/</url>
+    <content><![CDATA[<p>这里给出一些常用封装的说明<a id="more"></a></p>
+<h3 id="电阻">电阻</h3>
+<ol type="1">
+<li>直插封装：AXIAL，例如AXIAL-0.4，数字表示焊盘间距，该封装表示1/4W直插电阻。</li>
+<li>贴片封装：四位数字，例如0805，表示常用1/8W贴片电阻。</li>
+</ol>
+<h4 style="text-align: center">
+表1 贴片电阻功率对照表
+</h4>
+<table>
+<thead>
+<tr class="header">
+<th>型号</th>
+<th>功率</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0201</td>
+<td>1/20W</td>
+</tr>
+<tr class="even">
+<td>0402</td>
+<td>1/16W</td>
+</tr>
+<tr class="odd">
+<td>0603</td>
+<td>1/10W</td>
+</tr>
+<tr class="even">
+<td>0805</td>
+<td>1/8W</td>
+</tr>
+<tr class="odd">
+<td>1206</td>
+<td>1/4W</td>
+</tr>
+</tbody>
+</table>
+<h4 style="text-align: center">
+表2 贴片电阻尺寸对照表
+</h4>
+<table>
+<thead>
+<tr class="header">
+<th>型号</th>
+<th>尺寸</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0402</td>
+<td>1.0x0.5</td>
+</tr>
+<tr class="even">
+<td>0603</td>
+<td>1.6x0.8</td>
+</tr>
+<tr class="odd">
+<td>0805</td>
+<td>2.0x1.2</td>
+</tr>
+<tr class="even">
+<td>1206</td>
+<td>3.2x1.6</td>
+</tr>
+<tr class="odd">
+<td>1210</td>
+<td>3.2x2.5</td>
+</tr>
+<tr class="even">
+<td>1812</td>
+<td>4.5x3.2</td>
+</tr>
+<tr class="odd">
+<td>2225</td>
+<td>5.6x6.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="电容">电容</h3>
+<ol type="1">
+<li>直插封装：轴向（axial），即电容器在管脚轴上；径向（radial），即电容器两管脚在同一侧。</li>
+<li>贴片封装：贴片电容尺寸与贴片电阻尺寸相似。</li>
+</ol>
+<h4 style="text-align: center">
+表3 贴片电容尺寸对照表
+</h4>
+<table>
+<thead>
+<tr class="header">
+<th>型号</th>
+<th>尺寸</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0402</td>
+<td>1.0x0.5</td>
+</tr>
+<tr class="even">
+<td>0603</td>
+<td>1.6x0.8</td>
+</tr>
+<tr class="odd">
+<td>0805</td>
+<td>2.0x1.2</td>
+</tr>
+<tr class="even">
+<td>1206</td>
+<td>3.2x1.6</td>
+</tr>
+<tr class="odd">
+<td>1210</td>
+<td>3.2x2.5</td>
+</tr>
+<tr class="even">
+<td>1812</td>
+<td>4.5x3.2</td>
+</tr>
+<tr class="odd">
+<td>2225</td>
+<td>5.6x6.5</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>电路与系统</category>
       </categories>
       <tags>
-        <tag>退耦</tag>
-        <tag>滤波</tag>
+        <tag>电子元件</tag>
+        <tag>封装</tag>
       </tags>
   </entry>
   <entry>
@@ -656,20 +649,6 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
-    <title>百里荒</title>
-    <url>/2020/05/15/2020051523/</url>
-    <content><![CDATA[<img src="/2020/05/15/2020051523/20200503.jpg" class="">
-<a id="more"></a>
-<img src="/2020/05/15/2020051523/20200504.jpg" class="">
-]]></content>
-      <categories>
-        <category>旅行</category>
-      </categories>
-      <tags>
-        <tag>百里荒</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>都江堰</title>
     <url>/2020/05/15/2020051522/</url>
     <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
@@ -682,35 +661,6 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       <tags>
         <tag>都江堰</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Amazing Grace</title>
-    <url>/2020/05/18/2020051821/</url>
-    <content><![CDATA[<center>
-和 BIT 的 Wei 博士合奏 Amazing Grace
-</center>
-<video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controls playsinline poster="">Sorry, your browser does not support the video tag.</video>
-]]></content>
-      <categories>
-        <category>音乐</category>
-      </categories>
-      <tags>
-        <tag>Amazing Grace</tag>
-        <tag>奇异恩典</tag>
-        <tag>哨笛</tag>
-        <tag>长笛</tag>
-        <tag>演奏</tag>
-        <tag>合奏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>惊不惊喜？意不意外？po主又回来了！</title>
-    <url>/2018/04/15/surprise/</url>
-    <content><![CDATA[<p>沉寂了很长，很长，很长，很长，很长一段时间后，po主又回来更博客了。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
   </entry>
   <entry>
     <title>浅谈PVC哨笛的制作</title>
@@ -769,6 +719,76 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
+    <title>Amazing Grace</title>
+    <url>/2020/05/18/2020051821/</url>
+    <content><![CDATA[<center>
+和 BIT 的 Wei 博士合奏 Amazing Grace
+</center>
+<video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controls playsinline poster="">Sorry, your browser does not support the video tag.</video>
+]]></content>
+      <categories>
+        <category>音乐</category>
+      </categories>
+      <tags>
+        <tag>哨笛</tag>
+        <tag>Amazing Grace</tag>
+        <tag>奇异恩典</tag>
+        <tag>长笛</tag>
+        <tag>演奏</tag>
+        <tag>合奏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Endnote X9不能正确识别期刊名之解决方法</title>
+    <url>/2020/12/26/2020122621/</url>
+    <content><![CDATA[<p>更新Endnote X9后发现，在谷歌学术下载的.enw文件均无法正确识别期刊名。查阅相关资料，了解到按下列方法可解决问题。<a id="more"></a></p>
+<ol type="1">
+<li><p>下载该filter文件</p>
+<p><a href="https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf" target="_blank" rel="noopener">https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf</a></p></li>
+<li><p>双击打开，确保文件名为EndNote Import，并点击 Save As。</p></li>
+<li><p>关闭窗口</p></li>
+</ol>
+<p>此时，Endnote即可正确识别期刊名。注意，首次导入文献可能较慢，需耐心等待。</p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>endnote</tag>
+        <tag>解决方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>圣诞节</title>
+    <url>/2020/12/25/2020122520/</url>
+    <content><![CDATA[<img src="/2020/12/25/2020122520/20201201.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>武汉</tag>
+        <tag>街道口</tag>
+        <tag>Wuhan</tag>
+        <tag>Jiedaokou</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>惊不惊喜？意不意外？po主又回来了！</title>
+    <url>/2018/04/15/surprise/</url>
+    <content><![CDATA[<p>沉寂了很长，很长，很长，很长，很长一段时间后，po主又回来更博客了。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>本网站现已支持Disqus，请检查您的网络以获得最佳体验</title>
+    <url>/2020/12/26/top/</url>
+    <content><![CDATA[
+]]></content>
+  </entry>
+  <entry>
     <title>怎样使用UltraISO刻录Win系列系统U盘镜像</title>
     <url>/2018/06/01/2018060122/</url>
     <content><![CDATA[<p>很多朋友问我怎么装系统，我也多次进行过现场和远程指导，但大多数人都觉得很麻烦，不愿意学。在这里，我给出一个相对简单的Win系列教程，大家可以跟着我一步一步地完成“刻录系统镜像”到“UEFI安装操作系统”。对于linux系统的安装方法，我将在之后给出。<a id="more"></a></p>
@@ -803,31 +823,6 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
         <tag>装系统</tag>
         <tag>镜像</tag>
         <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>移动通信网络的基本组成</title>
-    <url>/2018/04/19/2018041916/</url>
-    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<a id="more"></a></p>
-<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
-<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
-<h1 id="g网络的组成">3G网络的组成</h1>
-<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
-<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
-<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
-<h1 id="lte网络的组成">LTE网络的组成</h1>
-<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
-<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
-<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
-<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
-<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
-]]></content>
-      <categories>
-        <category>信息与通信工程</category>
-      </categories>
-      <tags>
-        <tag>移动通信</tag>
-        <tag>LTE</tag>
       </tags>
   </entry>
   <entry>
@@ -882,6 +877,38 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
         <tag>机器学习</tag>
         <tag>谓词逻辑</tag>
         <tag>猴子摘香蕉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈芯片电源脚电容的取值问题</title>
+    <url>/2018/04/15/2018041521/</url>
+    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
+<h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
+<p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
+<p>一些PCB设计指导认为，在电源端放置一个1~10uF的电容来滤除低频噪声，在每个器件的电源与地之间放置一个0.01~0.1uF的电容来滤除高频噪声，显然这是从滤波的层面去考虑的。我们知道，电路要稳定可靠的运行，其电源一定要“干净”。所谓干净就是不能有杂波，在数字电路中，我们常常会看见FPGA的旁边和底面放置有大量的贴片电容，又如在模拟电路中，音乐发烧友总要在线性电源中放许多上千uF的大电容构建“大水塘”，这实际上就是为了滤除电源中的杂波。</p>
+<p>而去耦电容这一术语又是来形容什么的呢？顾名思义，用在退耦电路中的电容就是退耦电容，所谓退耦，就是为了防止电路中电流发生变化时，在供电电路中所形成的电流冲击对电路的正常工作产生影响。换言之，退耦电路能够有效的消除电路网络之间的寄生耦合。因此，退耦可以看作是滤波的一个小类。</p>
+<h2 id="滤波的取值问题">滤波的取值问题</h2>
+<p>搞清楚了什么是滤波，什么是退耦，我们接下来需要知道，为什么滤波电容总是要选择100nF和10uF。实际上上文所提到的“设计指导”已经描述了作为滤波时，电容的取值方法。而对于退耦，一些资料往往从储能的角度来谈，另一些则是从阻抗的角度来谈。储能理论认为：电容和负载同时跨接在电源两端，当负载电流不变时，其电流由稳压电源提供，此时电容两端电压与负载两端电压一致，且流过电容的电流为0。当负载瞬态电流发生变化时，由于负载芯片内部晶体管电平转换速度极快，必须在极短的时间内为负载芯片提供足够的电流，但是稳压电源无法很快响应负载电流的变化，因此负载芯片电压会降低。但是随着负载两端电压的降低，电容开始放电，为负载芯片提供电流。也就是说电容通过储存电能的方式为负载的瞬时电流提供了缓冲，使得负载两端的电压不发生显著变化，从而保证电路的正常运行。实际上，以上分析并没有什么卵用，他根本不能指导我们选用多大的电容，依据I=Cdv/dt，我们只知道C越大越好。因而有人提出了阻抗理论来指导我们选用电容。</p>
+<details class="note "><summary><p>defult</p>
+</summary>
+<p>“电容的阻抗常用z表示，其中z=1/(2πFC)。从公式上看，C越大其阻抗z就越小。但实际上，随着电容的增大，其对于高频的阻抗却越来越大。因此，在芯片工作的某个频率段内，存在一个确定的电容容值C，使得阻抗z最小。而该容值的偏大或偏小，都无法得到最小的阻抗z。”</p>
+
+</details>
+<p>这段话来自一位业内专家，实际上它描述的是将电源和负载看作并联在一起构成的复合电源系统。该系统可以等效为电源与一个阻抗器件相串联，则退耦电容被认为是跨接在该系统的两端。我们知道ΔV=ΔI*z，为了保证负载两端的电压不发生较大的变化，也即复合电源系统两端的电压不发生较大的变化，我们需要使电容的阻抗尽可能的小，而电容的阻抗与容值由显式关系，因而根据器件的相关参数，我们可以通过计算得到退耦电容的取值。</p>
+<p>实际上，不论是储能还是阻抗都是相对理论化的解释，而我们常用的100nF和10uF则是真正的经验之谈。</p>
+<details class="note "><summary><p>defult</p>
+</summary>
+<p>“局限于器件使用者的测试能力和设备限制，只能根据芯片公司实际测试验证的推荐值来选用滤波电容，因而最多最常见的就是104。”</p>
+
+</details>
+<p>正如这位专家所言，随着电子行业的高速发展，电子产品行业链的分工越来越明确，定位和分工越来越细化，一般的电子产品公司已经不再参与电路设计，取而代之的是来自芯片厂商的一系列种类繁多的解决方案，有的厂商甚至提供多方面的筛选功能，从造价、占地面积、效率等等一系列方面提供了完备的筛选机制帮助设计人员找到最合适的电路设计。因而，正是由于这种职能转变，使得104被广泛应用，并逐渐成为业内的“设计规范”。</p>
+]]></content>
+      <categories>
+        <category>电路与系统</category>
+      </categories>
+      <tags>
+        <tag>退耦</tag>
+        <tag>滤波</tag>
       </tags>
   </entry>
 </search>
