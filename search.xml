@@ -1,240 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>移动通信网络的基本组成</title>
-    <url>/2018/04/19/2018041916/</url>
-    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<a id="more"></a></p>
-<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
-<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
-<h1 id="g网络的组成">3G网络的组成</h1>
-<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
-<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
-<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
-<h1 id="lte网络的组成">LTE网络的组成</h1>
-<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
-<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
-<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
-<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
-<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
-]]></content>
-      <categories>
-        <category>信息与通信工程</category>
-      </categories>
-      <tags>
-        <tag>移动通信</tag>
-        <tag>LTE</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一种常用的无人机信道路径损耗模型</title>
-    <url>/2018/04/30/2018043016/</url>
-    <content><![CDATA[<p>根据《中华人民共和国无线电频率划分规定》及我国频谱使用情况，工信部规定了用于无人驾驶航空器系统的频段为840.5 - 845MHz、1430 - 1444MHz和2408 - 2440MHz。与传统的星地链路不同的是，无人机的飞行高度有限，卫星通信的信号一般要经过对流层、平流层、电离层和外层空间，其跨越距离大，因而影响信号传播的因素很多，通常采用的建模方法是阴影莱斯衰落模型。<a id="more"></a>今年一月份，民航总局对外发布了《关于征求《无人驾驶航空器飞行管理暂行条例（征求意见稿）》意见的通知》（下文简称《通知》），《通知》精神根据无人机运行风险大小，将民用无人机分为微型、轻型、小型、中型、大型等五个类型，其中：</p>
-<div class="note info"><p>微型无人机，是指空机重量小于0.25千克，设计性能同时满足飞行真高不超过50米、最大飞行速度不超过40千米/小时、无线电发射设备符合微功率短距离无线电发射设备技术要求的遥控驾驶航空器。</p>
-<p>轻型无人机，是指同时满足空机重量不超过4千克，最大起飞重量不超过7千克，最大飞行速度不超过100千米/小时，具备符合空域管理要求的空域保持能力和可靠被监视能力的遥控驾驶航空器，但不包括微型无人机。</p>
-<p>小型无人机，是指空机重量不超过15千克或者最大起飞重量不超过25千克的无人机，但不包括微型、轻型无人机。</p>
-<p>中型无人机，是指最大起飞重量超过25千克不超过150千克，且空机重量超过15千克的无人机。</p>
-<p>大型无人机，是指最大起飞重量超过150千克的无人机。</p>
-</div>
-<p>同时《通知》拟划设以下管控空域：</p>
-<ol type="1">
-<li><p>海拔高度大于120m</p></li>
-<li><p>5000m高空设立禁飞区</p></li>
-<li><p>2000m高空设立危险区</p></li>
-<li><p>植保机飞行高度不得大于30m</p></li>
-</ol>
-<p>因而，在研究无人机信道建模时，需要考虑无人机的飞行高度和无人机所处的电磁环境。假设无人机作为基站与地面用户之间的信道如图1所示，考虑到信道的互易性，在这里分析下行信道的路径损耗。无人机发送的信号在无障碍物的空中自由传播时只考虑自由空间路径损耗，当信号进入城镇环境中时，由于建筑物的阻挡和散射导致信号受到额外的、服从高斯分布的加性损耗，在此处我们将其定义为过度路径损耗 <span class="math inline">\({\eta}\)</span> ，该损耗与角度 <span class="math inline">\({\theta}\)</span> 有关[1]。</p>
-<img src="/2018/04/30/2018043016/18043001.png" class="" title="图1 无人机信道路径损耗模型">
-<p>根据上述假设，我们将无人机信道路径损耗 <span class="math inline">\({\rm{PL}_\xi}\)</span> 建模为</p>
-<p><span class="math display">\[
-\rm{PL}_\xi = \rm{FSPL} + \eta_\xi
-\]</span></p>
-<p>其中， <span class="math inline">\({\rm{FSPL}}\)</span> 表示自由空间路径损耗， <span class="math inline">\({\xi}\)</span> 表示当前信道， <span class="math inline">\({\eta_\xi}\)</span> 表示过度路径损耗。则路径损耗的期望表示为</p>
-<p><span class="math display">\[
-\Lambda = \sum\limits_\xi {\rm{PL}_\xi\bf{P}\left(\xi,\theta\right)}
-\]</span></p>
-<p>式中 <span class="math inline">\({\bf{P}\left(\xi,\theta\right)}\)</span> 表示特定信道类型的发生概率，这里我们考虑视距传输和非视距传输两种特定情况，即 <span class="math inline">\({\xi \in \left\{ {\rm{LoS,NLoS}} \right\}}\)</span> 。则有</p>
-<p><span class="math display">\[
-\bf{P}\left(\rm{NLoS},\theta\right)=1-\bf{P}\left(\rm{LoS},\theta\right)
-\]</span></p>
-<p>故路径损耗的期望可以由链路的发生概率和对应的损耗表示，即</p>
-<p><span class="math display">\[
-\Lambda=\bf{P}\left(\rm{LoS}\right)\times\rm{PL}_{\rm{LoS}}+\bf{P}\left(\rm{NLoS}\right)\times\rm{PL}_{\rm{NLoS}}
-\]</span></p>
-<p>根据国际电信联盟（ITU）的建议书P1410 3-60 GHz频带范围内地面宽带无线电接入系统设计所需的传播数据和预测方法[2]可知，无人机信道的视距传输概率符合如下表达式</p>
-<p><span class="math display">\[
-\bf{P}\left(\rm{LoS}\right)=\frac{1}{1+a\exp\left(-b\left(\frac{180}{\pi}{\tan}^{-1}\left(\frac{h}{r}\right)-a\right)\right)}
-\]</span></p>
-<p>其中 <span class="math inline">\(a\)</span> 、 <span class="math inline">\(b\)</span> 为与环境有关的常量，视距路径与非视距路径的传输损耗由下式给出</p>
-<p><span class="math display">\[
-\rm{PL}_\rm{LoS} = 20\log \left( \frac{4\pi{f_c}d}{c} \right) + \eta_\rm{LoS}
-\]</span></p>
-<p><span class="math display">\[
-\rm{PL}_\rm{NLoS} = 20\log \left( \frac{4\pi{f_c}d}{c} \right) + \eta_\rm{NLoS}
-\]</span></p>
-<p>其中 <span class="math inline">\({d=\sqrt{h^2+r^2}}\)</span> ，为无人机与用户间的距离。根据上述公式即可得到无人机信道路径损耗的统计值。</p>
-<p>参考文献</p>
-<p>[1] A. Al-Hourani, S. Kandeepan, and S. Lardner, "Optimal LAP Altitude for Maximum Coverage," IEEE Wireless Communications Letters, vol. 3, no. 6, pp. 569-572, Dec 2014.</p>
-<p>[2] ITU-R, "Propagation data and prediction methods required for the design of terrestrial broadband radio access systems operating in a frequency range from 3 to 60 GHz," ITU-R P.1410 ,2013.</p>
-]]></content>
-      <categories>
-        <category>信息与通信工程</category>
-      </categories>
-      <tags>
-        <tag>无人机</tag>
-        <tag>信道</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用三层BP神经网络解决字母T和L的识别问题</title>
-    <url>/2018/07/08/2018070817/</url>
-    <content><![CDATA[<p>  用三层BP神经网络解决字母T和L的识别问题。如图所示，每个字母用3x3的二维二值图表示，令黑方格为1，白方格为0，每个字母有4个样本，包括字母正常位置及旋转90，180和270°的图像。希望输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0。用BP算法求出权系数和阈值。<a id="more"></a>建议：旋转网络结构为9-3-1。隐单元非线性函数为<span class="math inline">\(AT\left( x,w \right)\)</span>，输出单元非线性函数为<span class="math inline">\(f(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span></p>
-<img src="/2018/07/08/2018070817/18070801.png" class="clear" title="图1 字母样本">
-<h3 id="实验方案">1 实验方案</h3>
-<p>  本实验通过搭建三层BP神经网络来解决字母T和L的识别问题。实验方案主要分为数据预处理，模型搭建以及训练识别三大模块。</p>
-<h4 id="数据预处理">1.1 数据预处理</h4>
-<p>  本次实验数据为上面的字母样本图，每个字母有4个样本，包括字母正常位置及旋转90°，180°和270°的图像。我们令黑方格为1，白方格为0，且按照下图1到9的顺序进行记录，得到数据集矩阵（一列代表一个样本，共八列）。并根据输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0来记录数据标签（八列，每列代表对应样本的输出）。</p>
-<img src="/2018/07/08/2018070817/18070802.png" class="clear" title="图2 样本记录顺序">
-<img src="/2018/07/08/2018070817/18070803.png" class="clear" title="图3 数据集矩阵（每列为一个样本）">
-<img src="/2018/07/08/2018070817/18070804.png" class="clear" title="图4 数据集标签（每列为一个标签）">
-<h4 id="模型搭建">1.2 模型搭建</h4>
-<p>  如图5所示为三层BP神经网络架构，其中第一层到第二层之间权值参数为<span class="math inline">\({W_1}\)</span>（大小为<span class="math inline">\(3\times 9\)</span>）和<span class="math inline">\({b_1}\)</span>（大小为<span class="math inline">\(3\times 1\)</span>），激活函数为<span class="math inline">\({f_1}(x)=\frac{2}{1+{e^{-\alpha x}}}-1\)</span>，第二层到第三层之间权值参数为<span class="math inline">\({W_2}\)</span>（大小为<span class="math inline">\(1\times 3\)</span>）和<span class="math inline">\({b_2}\)</span>（大小为<span class="math inline">\(1\times 1\)</span>），激活函数为<span class="math inline">\({f_2}(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span>，在最后为了输出0或1，增加一个门限函数<span class="math inline">\({f_3}(x)=\left\{ \begin{array} 0\ x&lt;0.5 \\ 1\ o.w. \end{array} \right.\)</span></p>
-<img src="/2018/07/08/2018070817/18070805.png" class="clear" title="图5 三层BP神经网络架构">
-<p>  搭建好上述模型后，使用BP算法计算梯度，反向传播算法步骤如下：</p>
-<p>1.计算前向传播的每个神经元的值，从层<span class="math inline">\({L_2}\)</span> , <span class="math inline">\({L_3}\)</span>,...直到输出层<span class="math inline">\({L_n}\)</span>。其中<span class="math inline">\(a_m^{(n+1)}=f(\sum\limits_{i}{W_{mi}^{(n)}a_i^{n}}+b_m^{(n)})\)</span></p>
-<p>2.对于输出层的节点，计算<span class="math inline">\(\delta _i^{nl}= \frac{\partial}{\partial z_i^{nl}}\frac{1}{2}\left\| {h_{W,b}}(x)-y \right\|^{2}=-(y_i-a_i^{nl})\cdot f&#39;(z_i^{nl})\)</span>。</p>
-<p>3.对于<span class="math inline">\(l=n_l-1,n_l-2,n_l-3,...,2\)</span>，对每个中间层的节点计算<span class="math inline">\(\delta _i^l=\left( \sum\limits_{j=1}^{s_{l+1}}{W_{ji}^l\delta _j^{l+1}} \right)\cdot f&#39;(z_i^l)\)</span> 。</p>
-<p>4.计算所需的偏导数，为以下两个表达式</p>
-<p><span class="math inline">\(\frac{\partial }{\partial W_{ij}^l}J(W,b)=a_j^l\delta _i^{l+1}\)</span></p>
-<p><span class="math inline">\(\frac{\partial }{\partial b_i^l}J(W,b)=\delta _i^{l+1}\)</span></p>
-<p>  反向传播算法如上所示。其实对于每个节点，它都是先计算相对于该节点的 “误差项”<span class="math inline">\(\delta _i^l\)</span> 。然后计算基于<span class="math inline">\(a_i^l\)</span> 的<span class="math inline">\(\delta _i^l\)</span>，并取其加权平均。 根据BP算法进行迭代，直到训练模型到代价函数取最小值。此时模型最优。其中本实验取得参数<span class="math inline">\(\alpha =1\)</span>。 本实验通过训练上述的八个样本，得到最优模型，然后依旧用这八个去检验输出结果，与其标签进行比较，得到识别率，结果如下。</p>
-<img src="/2018/07/08/2018070817/18070806.png" class="clear" title="图6 实验结果">
-<h3 id="实验结论">2 实验结论</h3>
-<p>  该实验通过搭建三层BP神经网络，通过数据预处理，模型搭建以及训练识别三大模块解决字母T和L的识别问题。最后用这八个样本去检验识别结果，与其标签进行比较，得到100%的识别率。</p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>机器学习</tag>
-        <tag>BP神经网络</tag>
-        <tag>识别</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>RSRP 你搞懂了吗？</title>
-    <url>/2019/01/23/2019012300/</url>
-    <content><![CDATA[<p>RSRP，RSRQ，RSSI等等这些概念非常相似，背后的意义和关键指标也让人摸不着头脑，这里给出了RSRP的相关知识。<a id="more"></a></p>
-<img src="/2019/01/23/2019012300/2019012301.jpg" class="" width="300">
-<h3 id="我的手机信号从没满格过咋肥四鸭">我的手机信号从没满格过，咋肥四鸭？</h3>
-<p>——别问我，问你的运营商去。</p>
-<p>用户经常抱怨信号不好，这里信号一词的定义却非常模糊。3GPP所给出的标准36.211、36.214将参考信号接收功率（RSRP）定义为考虑的测量频率带宽上承载参考信号的资源元素（RE）上的接收功率（以W为单位）的线性平均值，简单的理解就是用户终端接收到来自基站发送的参考信号的功率。那么“信号不好”这个概念就可以直观的认为是RSRP太低了。</p>
-<h3 id="rsrp事咋算的呀">RSRP事咋算的呀？</h3>
-<p>——别问我，问专家去。</p>
-<p>实际上，我也没查到3GPP给出的RSRP的计算表达式，如果有兴趣可以阅读36.211，这个写的非常详细，但唯独没有给出计算表达式，但RSRP与覆盖强度大概是如下关系。</p>
-<table>
-<thead>
-<tr class="header">
-<th>RSRP(dBm)</th>
-<th>覆盖强度级别</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Rx&lt;= -105</td>
-<td>覆盖强度等级6</td>
-<td>覆盖较差。业务基本无法起呼。</td>
-</tr>
-<tr class="even">
-<td>-105&lt;Rx&lt;=-95</td>
-<td>覆盖强度等级5</td>
-<td>覆盖差。室外语音业务能够起呼，但呼叫成功率低，掉话率高。室内业务基本无法发起业务。</td>
-</tr>
-<tr class="odd">
-<td>-95&lt;Rx&lt;=-85</td>
-<td>覆盖强度等级4</td>
-<td>覆盖一般，室外能够发起各种业务，可获得低速率的数据业务。但室内呼叫成功率低，掉话率高。</td>
-</tr>
-<tr class="even">
-<td>-85&lt;Rx&lt;=-75</td>
-<td>覆盖强度等级3</td>
-<td>覆盖较好，室外能够发起各种业务，可获得中等速率的数据业务。室内能发起各种业务，可获得低速率数据业务。</td>
-</tr>
-<tr class="odd">
-<td>-75&lt;Rx&lt;=-65</td>
-<td>覆盖强度等级2</td>
-<td>覆盖好，室外能够发起各种业务可获得高速率的数据业务。室内能发起各种业务，可获得中等速率数据业务。</td>
-</tr>
-<tr class="even">
-<td>Rx&gt;-65</td>
-<td>覆盖强度等级1</td>
-<td>覆盖非常好。</td>
-</tr>
-</tbody>
-</table>
-<p>这里，我们主要关注36.133给出的一个关系，即</p>
-<table>
-<thead>
-<tr class="header">
-<th>Reported value</th>
-<th>Measured quantity</th>
-<th>value Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>RSRP_00</td>
-<td>RSRP &gt; -140</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>RSRP_01</td>
-<td>-140 &lt; RSRP &lt; -139</td>
-<td>dBm</td>
-</tr>
-<tr class="odd">
-<td>RSRP_02</td>
-<td>-139 &lt; RSRP &lt; -138</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-<tr class="odd">
-<td>RSRP_95</td>
-<td>-46 &lt; RSRP &lt; -45</td>
-<td>dBm</td>
-</tr>
-<tr class="even">
-<td>RSRP_96</td>
-<td>-45 &lt; RSRP &lt; -44</td>
-<td>dBm</td>
-</tr>
-<tr class="odd">
-<td>RSRP_97</td>
-<td>-44 &lt; RSRP</td>
-<td>dBm</td>
-</tr>
-</tbody>
-</table>
-<p>其表达式为</p>
-<p><strong><em>RSRP质量（负） = RSRP测量报告值（正）-140</em></strong></p>
-<p>这个计算式反映了RSRP测量报告值与RSRP质量之间的关系。</p>
-]]></content>
-      <categories>
-        <category>信息与通信工程</category>
-      </categories>
-      <tags>
-        <tag>信道</tag>
-        <tag>RSRP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MIMO 信道容量推导</title>
     <url>/2018/09/22/2018092215/</url>
-    <content><![CDATA[<p>MIMO (Multiple-Input Multiple-Output) 技术指在发射端和接收端分别使用多个发射天线和接收天线，使信号通过发射端与接收端的多个天线传送和接收的通信方式。与传统的SISO系统相比，MIMO系统充分地利用了空间分集，通过多个天线实现多发多收，在不增加频谱资源和天线发射功率的情况下，可以成倍的提高系统信道容量，是第四代移动通信的核心技术。其演进技术大规模MIMO (Massive MIMO)，被视为下一代移动通信技术的关键。<a id="more"></a></p>
+    <content><![CDATA[<p>MIMO (Multiple-Input Multiple-Output) 技术指在发射端和接收端分别使用多个发射天线和接收天线，使信号通过发射端与接收端的多个天线传送和接收的通信方式。与传统的SISO系统相比，MIMO系统充分地利用了空间分集，通过多个天线实现多发多收，在不增加频谱资源和天线发射功率的情况下，可以成倍的提高系统信道容量，是第四代移动通信的核心技术。其演进技术大规模MIMO (Massive MIMO)，被视为下一代移动通信技术的关键。<span id="more"></span></p>
 <h2 id="mimo系统模型">MIMO系统模型</h2>
 <p>设发射信号为<span class="math inline">\({x}\)</span>，则接收信号可以表示为</p>
 <p><span class="math display">\[
@@ -417,9 +186,149 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
+    <title>Endnote X9不能正确识别期刊名之解决方法</title>
+    <url>/2020/12/26/2020122621/</url>
+    <content><![CDATA[<p>更新Endnote X9后发现，在谷歌学术下载的.enw文件均无法正确识别期刊名。查阅相关资料，了解到按下列方法可解决问题。<span id="more"></span></p>
+<ol type="1">
+<li><p>下载该filter文件</p>
+<p><a href="https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf">https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf</a></p></li>
+<li><p>双击打开，确保文件名为EndNote Import，并点击 Save As。</p></li>
+<li><p>关闭窗口</p></li>
+</ol>
+<p>此时，Endnote即可正确识别期刊名。注意，首次导入文献可能较慢，需耐心等待。</p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>endnote</tag>
+        <tag>解决方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>圣诞节</title>
+    <url>/2020/12/25/2020122520/</url>
+    <content><![CDATA[<img src="/2020/12/25/2020122520/20201201.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>武汉</tag>
+        <tag>街道口</tag>
+        <tag>Wuhan</tag>
+        <tag>Jiedaokou</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Amazing Grace</title>
+    <url>/2020/05/18/2020051821/</url>
+    <content><![CDATA[<center>
+和 BIT 的 Wei 博士合奏 Amazing Grace
+</center>
+<video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+]]></content>
+      <categories>
+        <category>音乐</category>
+      </categories>
+      <tags>
+        <tag>哨笛</tag>
+        <tag>Amazing Grace</tag>
+        <tag>奇异恩典</tag>
+        <tag>长笛</tag>
+        <tag>演奏</tag>
+        <tag>合奏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈PVC哨笛的制作</title>
+    <url>/2020/05/17/2020051716/</url>
+    <content><![CDATA[<p>哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。<span id="more"></span></p>
+<img src="/2020/05/17/2020051716/20200505.jpg" class="" width="272">
+<p>这把由制笛大师一叶之舟改进的飞叨哨笛为高音D调，其指法与竹笛无异，但定调的方法与竹笛不同，为全按时定调，而竹笛则为开三孔时定调。那么，按照竹笛的定调方法，这把哨笛就是G调了。拿到这把哨笛，我就迫不及待地演奏了一些简单曲目，例如Long Long Ago，欢乐颂，爱尔兰画眉。稍作尝试，便觉这把塑料笛头套接黄铜笛身的飞叨哨笛音色清脆、甜美，但与我之前玩过的布鲁斯口琴相比实在是太难控制。即使一叶大师对笛头进行了修改使其不易破音，但在吹奏时仍需控制好气息才能发挥这把琴的完美音色，可见哨笛对演奏者的气息控制能力要求非常高。</p>
+<p>今年年初，一场罕见的传染病大爆发肆虐了我国，为了响应国家号召，为自己负责、为他人负责、为社会负责，我一直呆在家中完成毕业论文。闲暇之余，我便拿起放假前邮回家的一把降B调世代黄铜哨笛吹一吹。这把笛子与飞叨D均属于塑料笛头套金属笛身的廉价哨笛，但从外观上看较飞叨D更粗更长、指距更大，且吹起来更加难以控制。我选择这把笛为我的第二把哨笛，主要是因为著名的《泰坦尼克号》主题曲《我心永恒》的前奏就是出自这把哨笛，且有大量网友为之站台，想必这把哨笛的音质绝对是顶级的。但是，当我尝试演奏时，它的音色却令我大失所望。我尝试按照一叶之舟大师和国外制笛大师弗里曼的方法用潮湿的卫生纸堵住笛头的一处塑料缺口，但效果并不明显。直到我吹过低音D哨笛后，我才发现这把笛子的正确演奏方法。在正确应用气息后，这把哨笛也同样发挥出了它优秀的音色。但是，我的飞叨D仍然留在学校，这也就萌生了我制作一把哨笛的想法。</p>
+<p>通过浏览相关网页，我发现自制哨笛无外乎两种：一种是PVC管，另一种则是铝合金管，其他材质如PPR管、竹管、木管等则由于管壁厚度、管材的音色以及加工的难易程度少有人尝试。我家零几年装修时剩有几根16的PVC线管，长度刚好与高音D的长度差不多。翻了一下工具箱，正好有两个16的直接，一个开水瓶塞子，可以用作笛头。我爸年前又借了一把电钻，正好方便钻孔。</p>
+<img src="/2020/05/17/2020051716/20200506.jpg" class="" width="480">
+<h2 id="开始制作">开始制作</h2>
+<p>按照管乐的通用制作方法，开孔的方法应按照2开11次方计算。在这里，为了图方便，可以根据贴吧中的一个excel表划线、标记孔的位置和直径。则首先，应按照调性、管径锯取比基音长度稍长4~5公分的PVC管。在这里，需要了解几个非常重要的物理量：</p>
+<ul>
+<li><p>管壁厚度</p>
+<p>考虑到PVC哨笛的结构，管壁厚度不仅影响哨笛空气柱的振动，同时也决定了风道的高度。故管壁厚度的改变一方面会导致音色从明亮到低沉的变化，另一方面风道的高度则影响音色的纯净与否。管壁厚，则音色沉、气声大、风味传统；管壁薄，则音色亮、气声小、偏竖笛音色。同时，偏软的管材可能会吸收空气柱的高频振动，使得音色发暗。Guido Gonzato博士的手册认为，若管壁厚度超过1.7mm，则会产生大量气声。在这里，一般选取1~1.5mm的硬质管材。</p></li>
+<li><p>风道长度/宽度</p>
+<p>风道长度和宽度决定了笛子的灵敏度。网络上一般评价哨笛的操控难易度一般用到两个指标：一是省力/费力，而是省气/废气。</p>
+<ul>
+<li>风道长度长，则灵敏度低、有背压、省气</li>
+<li>风道长度短，则灵敏度高、废气</li>
+<li>风道宽度宽，则音量大、气声大、废气</li>
+<li>风道宽度窄，则音量小、音色纯、省气</li>
+</ul></li>
+<li><p>吹窗口长度</p>
+<p>吹窗口长度则影响笛子两个八度的音色。较长的吹窗口长度使得第一个八度的音色更实而第二个八度较为难上，较短的吹窗口长度使得第一个八度的音色发虚而第二个八度更容易上去。</p></li>
+<li><p>风道高度</p>
+<p>风道高度影响音色的气声。风道高度越高，气声越大。</p></li>
+<li><p>哨片斜度</p>
+<p>哨片应有锋利的边缘和光滑的斜面，且角度不宜过大或过小，否则会影响音色的亮度和气声的大小。</p></li>
+</ul>
+<h2 id="制作笛头">制作笛头</h2>
+<p>笛头是哨笛制作的重中之重，因为笛头几乎决定了笛子的整体音色。PVC哨笛的笛头有两种制作方法，一种是将直接（直通）套在头部，另一种则是裁取一小段与笛声相同粗细的PVC管，从中剖开作为管套再套在头部。使用直接更为美观，在笛头的背面不会出现接缝，亦不用胶水粘接，但需要用美工刀刮掉中间的立挡，使PVC管能够贯通直接。</p>
+<p>将直接（管套）套接在笛声顶端，二者顶部平齐，往下划吹窗，从吹窗中部划直线至笛尾。</p>
+<p>拔出直接（管套），按照吹窗宽度，向上划出风道，并锯除风道和吹窗。用锉刀打磨风道边缘使其光滑平直。</p>
+<p>观察笛身，应仅有一方形槽，继续打磨吹窗底部，可得到粗制的哨片。折叠砂纸使之有合适的宽度来打磨哨片，注意打磨哨片使其表面光滑以减少气声，且哨片应跟随管的弧度成为一弧形斜面，而不是竖直向下打磨，否则哨片底端会出现弧形的缺口影响空气的切割。</p>
+<p>削取圆柱木塞一个，其半径略大于管径以便于仔细调整并使其与直接（管套）以及笛身贴合紧密。调整插入笛头一侧的木塞边缘使之锋利，且木塞的边缘应与底面的圆垂直。注意，木塞不应为纺锤形或锥形，且不能倒角，否则会影响音色的纯度。若木塞为底大头小的锥形，则风道会变为一个吹口厚、吹窗口薄的斜面，此时笛子的灵敏度会有所提高，但是也会产生背压。</p>
+<p>将木塞插入笛头测试长度，使木塞下端刚好到达吹窗口上端。观察笛头，锯出合适的斜面，既能方便嘴唇含住笛头，也能保证直接（管套）能紧密箍住笛声和木塞。</p>
+<h2 id="制作笛身">制作笛身</h2>
+<p>打开调谐器软件，试吹笛子。此时由于笛身较长，音调应较低。从笛尾向上打磨，并试吹，直到达到标准音或在其左右10音分处即可，此时笛声的长度不应再变动。</p>
+<p>根据各孔的位置和直径，按顺序从底部第一个孔开始开孔。注意，首先开一小孔，再缓慢扩圆。若音调低则往上挖，往大挖。若音调高，则往下挖，尽量不扩大孔的大小。对比excel表，孔的大小应符合表中所述规律，而位置和大小并不与表完全一致。若完全按照表格制作，则可能无法制作出音调正确的笛子。</p>
+<p>自下而上开完六孔，则测试每一孔的音调并按上述方法调整。可以尝试完整演奏音乐，测试笛子的性能。对直接（管套）、木塞进行微调后，获得最佳的笛子状态。</p>
+<p>进一步打磨笛头、笛身、指孔使之光滑美观。至此，哨笛的制作就完成了。</p>
+<h2 id="后记">后记</h2>
+<p>哨笛的制作工序简单，这也从另一个侧面反映了其便士笛这一名称的由来，即，一个便士就能买到的笛子。在制作完这把高音D调的哨笛之后，我继续制作了低音D调的哨笛，安装了一个直接并制作了一个中音F调的笛身。由于采用了25的线管，内径约为22.25mm，低音D调的哨笛音色低沉且悠扬，但指距较大，按起来比较费劲。而F调的笛身则非常废气且难吹，可见，过粗的管径不适合制作中音哨笛。</p>
+<img src="/2020/05/17/2020051716/20200507.jpg" class="" width="272">
+<h2 id="参考文献">参考文献</h2>
+<p>[1] Gonzato G., "The "Low-Tech" Whistle: How to make a fine PVC whistle," http://www.ggwhistles.com/howto, Oct. 2016.</p>
+<p>[2] 飘去来, "DIY哨笛数据汇总," https://tieba.baidu.com/p/3511500404?red_tag=1156576733, Jan. 2015.</p>
+]]></content>
+      <categories>
+        <category>音乐</category>
+      </categories>
+      <tags>
+        <tag>哨笛</tag>
+        <tag>制作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>都江堰</title>
+    <url>/2020/05/15/2020051522/</url>
+    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
+<span id="more"></span>
+<img src="/2020/05/15/2020051522/20200502.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>都江堰</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Morocco</title>
+    <url>/2019/06/30/2019063008/</url>
+    <content><![CDATA[<img src="/2019/06/30/2019063008/19063001.jpg" class="">
+<span id="more"></span>
+<img src="/2019/06/30/2019063008/19063002.jpg" class="">
+<img src="/2019/06/30/2019063008/19063003.jpg" class="">
+]]></content>
+      <categories>
+        <category>旅行</category>
+      </categories>
+      <tags>
+        <tag>Morocco</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux bash下如何运行Matlab程序</title>
     <url>/2019/04/28/2019042819/</url>
-    <content><![CDATA[<p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。<a id="more"></a></p>
+    <content><![CDATA[<p>购置服务器后，应安装相应的科学计算软件。对于有显示器的服务器，用户可以方便的使用图形界面操作软件。而对于常见的远程登录方式，或是无显示设备的服务器而言，一般采用bash命令操作软件。这里以常用的Matlab为例，简单介绍在linux下如何用bash运行Matlab程序。<span id="more"></span></p>
 <h2 id="第一步将程序文件上传至服务器">第一步：将程序文件上传至服务器</h2>
 <p>上传至服务器有两种方法，一是用U盘或其他物理介质拷贝至服务器中，该方法较为简单，只需要完成简单的挂载操作即可，此处不再赘述。另一种则是利用ssh上传文件，为方便起见，推荐使用WinSCP进行文件的上传和下载。需要注意的是，若无法顺利登录服务器，请检查软件高级选项中的“隧道”选项卡中是否勾选并正确配置了ssh信息。</p>
 <h2 id="第二步切换工作目录">第二步：切换工作目录</h2>
@@ -496,9 +405,120 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
+    <title>RSRP 你搞懂了吗？</title>
+    <url>/2019/01/23/2019012300/</url>
+    <content><![CDATA[<p>RSRP，RSRQ，RSSI等等这些概念非常相似，背后的意义和关键指标也让人摸不着头脑，这里给出了RSRP的相关知识。<span id="more"></span></p>
+<img src="/2019/01/23/2019012300/2019012301.jpg" class="" width="300">
+<h3 id="我的手机信号从没满格过咋肥四鸭">我的手机信号从没满格过，咋肥四鸭？</h3>
+<p>——别问我，问你的运营商去。</p>
+<p>用户经常抱怨信号不好，这里信号一词的定义却非常模糊。3GPP所给出的标准36.211、36.214将参考信号接收功率（RSRP）定义为考虑的测量频率带宽上承载参考信号的资源元素（RE）上的接收功率（以W为单位）的线性平均值，简单的理解就是用户终端接收到来自基站发送的参考信号的功率。那么“信号不好”这个概念就可以直观的认为是RSRP太低了。</p>
+<h3 id="rsrp事咋算的呀">RSRP事咋算的呀？</h3>
+<p>——别问我，问专家去。</p>
+<p>实际上，我也没查到3GPP给出的RSRP的计算表达式，如果有兴趣可以阅读36.211，这个写的非常详细，但唯独没有给出计算表达式，但RSRP与覆盖强度大概是如下关系。</p>
+<table>
+<thead>
+<tr class="header">
+<th>RSRP(dBm)</th>
+<th>覆盖强度级别</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rx&lt;= -105</td>
+<td>覆盖强度等级6</td>
+<td>覆盖较差。业务基本无法起呼。</td>
+</tr>
+<tr class="even">
+<td>-105&lt;Rx&lt;=-95</td>
+<td>覆盖强度等级5</td>
+<td>覆盖差。室外语音业务能够起呼，但呼叫成功率低，掉话率高。室内业务基本无法发起业务。</td>
+</tr>
+<tr class="odd">
+<td>-95&lt;Rx&lt;=-85</td>
+<td>覆盖强度等级4</td>
+<td>覆盖一般，室外能够发起各种业务，可获得低速率的数据业务。但室内呼叫成功率低，掉话率高。</td>
+</tr>
+<tr class="even">
+<td>-85&lt;Rx&lt;=-75</td>
+<td>覆盖强度等级3</td>
+<td>覆盖较好，室外能够发起各种业务，可获得中等速率的数据业务。室内能发起各种业务，可获得低速率数据业务。</td>
+</tr>
+<tr class="odd">
+<td>-75&lt;Rx&lt;=-65</td>
+<td>覆盖强度等级2</td>
+<td>覆盖好，室外能够发起各种业务可获得高速率的数据业务。室内能发起各种业务，可获得中等速率数据业务。</td>
+</tr>
+<tr class="even">
+<td>Rx&gt;-65</td>
+<td>覆盖强度等级1</td>
+<td>覆盖非常好。</td>
+</tr>
+</tbody>
+</table>
+<p>这里，我们主要关注36.133给出的一个关系，即</p>
+<table>
+<thead>
+<tr class="header">
+<th>Reported value</th>
+<th>Measured quantity</th>
+<th>value Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RSRP_00</td>
+<td>RSRP &gt; -140</td>
+<td>dBm</td>
+</tr>
+<tr class="even">
+<td>RSRP_01</td>
+<td>-140 &lt; RSRP &lt; -139</td>
+<td>dBm</td>
+</tr>
+<tr class="odd">
+<td>RSRP_02</td>
+<td>-139 &lt; RSRP &lt; -138</td>
+<td>dBm</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr class="odd">
+<td>RSRP_95</td>
+<td>-46 &lt; RSRP &lt; -45</td>
+<td>dBm</td>
+</tr>
+<tr class="even">
+<td>RSRP_96</td>
+<td>-45 &lt; RSRP &lt; -44</td>
+<td>dBm</td>
+</tr>
+<tr class="odd">
+<td>RSRP_97</td>
+<td>-44 &lt; RSRP</td>
+<td>dBm</td>
+</tr>
+</tbody>
+</table>
+<p>其表达式为</p>
+<p><strong><em>RSRP质量（负） = RSRP测量报告值（正）-140</em></strong></p>
+<p>这个计算式反映了RSRP测量报告值与RSRP质量之间的关系。</p>
+]]></content>
+      <categories>
+        <category>信息与通信工程</category>
+      </categories>
+      <tags>
+        <tag>信道</tag>
+        <tag>RSRP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>阻容封装知识</title>
     <url>/2018/08/05/2018080522/</url>
-    <content><![CDATA[<p>这里给出一些常用封装的说明<a id="more"></a></p>
+    <content><![CDATA[<p>这里给出一些常用封装的说明<span id="more"></span></p>
 <h3 id="电阻">电阻</h3>
 <ol type="1">
 <li>直插封装：AXIAL，例如AXIAL-0.4，数字表示焊盘间距，该封装表示1/4W直插电阻。</li>
@@ -634,201 +654,45 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
       </tags>
   </entry>
   <entry>
-    <title>Morocco</title>
-    <url>/2019/06/30/2019063008/</url>
-    <content><![CDATA[<img src="/2019/06/30/2019063008/19063001.jpg" class="">
-<a id="more"></a>
-<img src="/2019/06/30/2019063008/19063002.jpg" class="">
-<img src="/2019/06/30/2019063008/19063003.jpg" class="">
+    <title>用三层BP神经网络解决字母T和L的识别问题</title>
+    <url>/2018/07/08/2018070817/</url>
+    <content><![CDATA[<p>  用三层BP神经网络解决字母T和L的识别问题。如图所示，每个字母用3x3的二维二值图表示，令黑方格为1，白方格为0，每个字母有4个样本，包括字母正常位置及旋转90，180和270°的图像。希望输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0。用BP算法求出权系数和阈值。<span id="more"></span>建议：旋转网络结构为9-3-1。隐单元非线性函数为<span class="math inline">\(AT\left( x,w \right)\)</span>，输出单元非线性函数为<span class="math inline">\(f(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span></p>
+<img src="/2018/07/08/2018070817/18070801.png" class="clear" title="图1 字母样本">
+<h3 id="实验方案">1 实验方案</h3>
+<p>  本实验通过搭建三层BP神经网络来解决字母T和L的识别问题。实验方案主要分为数据预处理，模型搭建以及训练识别三大模块。</p>
+<h4 id="数据预处理">1.1 数据预处理</h4>
+<p>  本次实验数据为上面的字母样本图，每个字母有4个样本，包括字母正常位置及旋转90°，180°和270°的图像。我们令黑方格为1，白方格为0，且按照下图1到9的顺序进行记录，得到数据集矩阵（一列代表一个样本，共八列）。并根据输入不同的位置下的T时，网络输出为1，而输入不同位置的L时，网络输出为0来记录数据标签（八列，每列代表对应样本的输出）。</p>
+<img src="/2018/07/08/2018070817/18070802.png" class="clear" title="图2 样本记录顺序">
+<img src="/2018/07/08/2018070817/18070803.png" class="clear" title="图3 数据集矩阵（每列为一个样本）">
+<img src="/2018/07/08/2018070817/18070804.png" class="clear" title="图4 数据集标签（每列为一个标签）">
+<h4 id="模型搭建">1.2 模型搭建</h4>
+<p>  如图5所示为三层BP神经网络架构，其中第一层到第二层之间权值参数为<span class="math inline">\({W_1}\)</span>（大小为<span class="math inline">\(3\times 9\)</span>）和<span class="math inline">\({b_1}\)</span>（大小为<span class="math inline">\(3\times 1\)</span>），激活函数为<span class="math inline">\({f_1}(x)=\frac{2}{1+{e^{-\alpha x}}}-1\)</span>，第二层到第三层之间权值参数为<span class="math inline">\({W_2}\)</span>（大小为<span class="math inline">\(1\times 3\)</span>）和<span class="math inline">\({b_2}\)</span>（大小为<span class="math inline">\(1\times 1\)</span>），激活函数为<span class="math inline">\({f_2}(x)=\frac{1}{1+{e^{-\alpha x}}}\)</span>，在最后为了输出0或1，增加一个门限函数<span class="math inline">\({f_3}(x)=\left\{ \begin{array} 0\ x&lt;0.5 \\ 1\ o.w. \end{array} \right.\)</span></p>
+<img src="/2018/07/08/2018070817/18070805.png" class="clear" title="图5 三层BP神经网络架构">
+<p>  搭建好上述模型后，使用BP算法计算梯度，反向传播算法步骤如下：</p>
+<p>1.计算前向传播的每个神经元的值，从层<span class="math inline">\({L_2}\)</span> , <span class="math inline">\({L_3}\)</span>,...直到输出层<span class="math inline">\({L_n}\)</span>。其中<span class="math inline">\(a_m^{(n+1)}=f(\sum\limits_{i}{W_{mi}^{(n)}a_i^{n}}+b_m^{(n)})\)</span></p>
+<p>2.对于输出层的节点，计算<span class="math inline">\(\delta _i^{nl}= \frac{\partial}{\partial z_i^{nl}}\frac{1}{2}\left\| {h_{W,b}}(x)-y \right\|^{2}=-(y_i-a_i^{nl})\cdot f&#39;(z_i^{nl})\)</span>。</p>
+<p>3.对于<span class="math inline">\(l=n_l-1,n_l-2,n_l-3,...,2\)</span>，对每个中间层的节点计算<span class="math inline">\(\delta _i^l=\left( \sum\limits_{j=1}^{s_{l+1}}{W_{ji}^l\delta _j^{l+1}} \right)\cdot f&#39;(z_i^l)\)</span> 。</p>
+<p>4.计算所需的偏导数，为以下两个表达式</p>
+<p><span class="math inline">\(\frac{\partial }{\partial W_{ij}^l}J(W,b)=a_j^l\delta _i^{l+1}\)</span></p>
+<p><span class="math inline">\(\frac{\partial }{\partial b_i^l}J(W,b)=\delta _i^{l+1}\)</span></p>
+<p>  反向传播算法如上所示。其实对于每个节点，它都是先计算相对于该节点的 “误差项”<span class="math inline">\(\delta _i^l\)</span> 。然后计算基于<span class="math inline">\(a_i^l\)</span> 的<span class="math inline">\(\delta _i^l\)</span>，并取其加权平均。 根据BP算法进行迭代，直到训练模型到代价函数取最小值。此时模型最优。其中本实验取得参数<span class="math inline">\(\alpha =1\)</span>。 本实验通过训练上述的八个样本，得到最优模型，然后依旧用这八个去检验输出结果，与其标签进行比较，得到识别率，结果如下。</p>
+<img src="/2018/07/08/2018070817/18070806.png" class="clear" title="图6 实验结果">
+<h3 id="实验结论">2 实验结论</h3>
+<p>  该实验通过搭建三层BP神经网络，通过数据预处理，模型搭建以及训练识别三大模块解决字母T和L的识别问题。最后用这八个样本去检验识别结果，与其标签进行比较，得到100%的识别率。</p>
 ]]></content>
       <categories>
-        <category>旅行</category>
+        <category>算法</category>
       </categories>
       <tags>
-        <tag>Morocco</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>都江堰</title>
-    <url>/2020/05/15/2020051522/</url>
-    <content><![CDATA[<img src="/2020/05/15/2020051522/20200501.jpg" class="">
-<a id="more"></a>
-<img src="/2020/05/15/2020051522/20200502.jpg" class="">
-]]></content>
-      <categories>
-        <category>旅行</category>
-      </categories>
-      <tags>
-        <tag>都江堰</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈PVC哨笛的制作</title>
-    <url>/2020/05/17/2020051716/</url>
-    <content><![CDATA[<p>哨笛，由两部分构成，头部是一口哨，身开大小不均的六孔。吹奏时口含哨头，左手中间三指按压上三孔，右手中间三指按压下三孔，左撇子则反之。大拇指位于笛身后，与嘴唇构成稳定结构。小指则按照个人习惯摆放，帮助其他手指稳定笛身。<a id="more"></a></p>
-<img src="/2020/05/17/2020051716/20200505.jpg" class="" width="272">
-<p>这把由制笛大师一叶之舟改进的飞叨哨笛为高音D调，其指法与竹笛无异，但定调的方法与竹笛不同，为全按时定调，而竹笛则为开三孔时定调。那么，按照竹笛的定调方法，这把哨笛就是G调了。拿到这把哨笛，我就迫不及待地演奏了一些简单曲目，例如Long Long Ago，欢乐颂，爱尔兰画眉。稍作尝试，便觉这把塑料笛头套接黄铜笛身的飞叨哨笛音色清脆、甜美，但与我之前玩过的布鲁斯口琴相比实在是太难控制。即使一叶大师对笛头进行了修改使其不易破音，但在吹奏时仍需控制好气息才能发挥这把琴的完美音色，可见哨笛对演奏者的气息控制能力要求非常高。</p>
-<p>今年年初，一场罕见的传染病大爆发肆虐了我国，为了响应国家号召，为自己负责、为他人负责、为社会负责，我一直呆在家中完成毕业论文。闲暇之余，我便拿起放假前邮回家的一把降B调世代黄铜哨笛吹一吹。这把笛子与飞叨D均属于塑料笛头套金属笛身的廉价哨笛，但从外观上看较飞叨D更粗更长、指距更大，且吹起来更加难以控制。我选择这把笛为我的第二把哨笛，主要是因为著名的《泰坦尼克号》主题曲《我心永恒》的前奏就是出自这把哨笛，且有大量网友为之站台，想必这把哨笛的音质绝对是顶级的。但是，当我尝试演奏时，它的音色却令我大失所望。我尝试按照一叶之舟大师和国外制笛大师弗里曼的方法用潮湿的卫生纸堵住笛头的一处塑料缺口，但效果并不明显。直到我吹过低音D哨笛后，我才发现这把笛子的正确演奏方法。在正确应用气息后，这把哨笛也同样发挥出了它优秀的音色。但是，我的飞叨D仍然留在学校，这也就萌生了我制作一把哨笛的想法。</p>
-<p>通过浏览相关网页，我发现自制哨笛无外乎两种：一种是PVC管，另一种则是铝合金管，其他材质如PPR管、竹管、木管等则由于管壁厚度、管材的音色以及加工的难易程度少有人尝试。我家零几年装修时剩有几根16的PVC线管，长度刚好与高音D的长度差不多。翻了一下工具箱，正好有两个16的直接，一个开水瓶塞子，可以用作笛头。我爸年前又借了一把电钻，正好方便钻孔。</p>
-<img src="/2020/05/17/2020051716/20200506.jpg" class="" width="480">
-<h2 id="开始制作">开始制作</h2>
-<p>按照管乐的通用制作方法，开孔的方法应按照2开11次方计算。在这里，为了图方便，可以根据贴吧中的一个excel表划线、标记孔的位置和直径。则首先，应按照调性、管径锯取比基音长度稍长4~5公分的PVC管。在这里，需要了解几个非常重要的物理量：</p>
-<ul>
-<li><p>管壁厚度</p>
-<p>考虑到PVC哨笛的结构，管壁厚度不仅影响哨笛空气柱的振动，同时也决定了风道的高度。故管壁厚度的改变一方面会导致音色从明亮到低沉的变化，另一方面风道的高度则影响音色的纯净与否。管壁厚，则音色沉、气声大、风味传统；管壁薄，则音色亮、气声小、偏竖笛音色。同时，偏软的管材可能会吸收空气柱的高频振动，使得音色发暗。Guido Gonzato博士的手册认为，若管壁厚度超过1.7mm，则会产生大量气声。在这里，一般选取1~1.5mm的硬质管材。</p></li>
-<li><p>风道长度/宽度</p>
-<p>风道长度和宽度决定了笛子的灵敏度。网络上一般评价哨笛的操控难易度一般用到两个指标：一是省力/费力，而是省气/废气。</p>
-<ul>
-<li>风道长度长，则灵敏度低、有背压、省气</li>
-<li>风道长度短，则灵敏度高、废气</li>
-<li>风道宽度宽，则音量大、气声大、废气</li>
-<li>风道宽度窄，则音量小、音色纯、省气</li>
-</ul></li>
-<li><p>吹窗口长度</p>
-<p>吹窗口长度则影响笛子两个八度的音色。较长的吹窗口长度使得第一个八度的音色更实而第二个八度较为难上，较短的吹窗口长度使得第一个八度的音色发虚而第二个八度更容易上去。</p></li>
-<li><p>风道高度</p>
-<p>风道高度影响音色的气声。风道高度越高，气声越大。</p></li>
-<li><p>哨片斜度</p>
-<p>哨片应有锋利的边缘和光滑的斜面，且角度不宜过大或过小，否则会影响音色的亮度和气声的大小。</p></li>
-</ul>
-<h2 id="制作笛头">制作笛头</h2>
-<p>笛头是哨笛制作的重中之重，因为笛头几乎决定了笛子的整体音色。PVC哨笛的笛头有两种制作方法，一种是将直接（直通）套在头部，另一种则是裁取一小段与笛声相同粗细的PVC管，从中剖开作为管套再套在头部。使用直接更为美观，在笛头的背面不会出现接缝，亦不用胶水粘接，但需要用美工刀刮掉中间的立挡，使PVC管能够贯通直接。</p>
-<p>将直接（管套）套接在笛声顶端，二者顶部平齐，往下划吹窗，从吹窗中部划直线至笛尾。</p>
-<p>拔出直接（管套），按照吹窗宽度，向上划出风道，并锯除风道和吹窗。用锉刀打磨风道边缘使其光滑平直。</p>
-<p>观察笛身，应仅有一方形槽，继续打磨吹窗底部，可得到粗制的哨片。折叠砂纸使之有合适的宽度来打磨哨片，注意打磨哨片使其表面光滑以减少气声，且哨片应跟随管的弧度成为一弧形斜面，而不是竖直向下打磨，否则哨片底端会出现弧形的缺口影响空气的切割。</p>
-<p>削取圆柱木塞一个，其半径略大于管径以便于仔细调整并使其与直接（管套）以及笛身贴合紧密。调整插入笛头一侧的木塞边缘使之锋利，且木塞的边缘应与底面的圆垂直。注意，木塞不应为纺锤形或锥形，且不能倒角，否则会影响音色的纯度。若木塞为底大头小的锥形，则风道会变为一个吹口厚、吹窗口薄的斜面，此时笛子的灵敏度会有所提高，但是也会产生背压。</p>
-<p>将木塞插入笛头测试长度，使木塞下端刚好到达吹窗口上端。观察笛头，锯出合适的斜面，既能方便嘴唇含住笛头，也能保证直接（管套）能紧密箍住笛声和木塞。</p>
-<h2 id="制作笛身">制作笛身</h2>
-<p>打开调谐器软件，试吹笛子。此时由于笛身较长，音调应较低。从笛尾向上打磨，并试吹，直到达到标准音或在其左右10音分处即可，此时笛声的长度不应再变动。</p>
-<p>根据各孔的位置和直径，按顺序从底部第一个孔开始开孔。注意，首先开一小孔，再缓慢扩圆。若音调低则往上挖，往大挖。若音调高，则往下挖，尽量不扩大孔的大小。对比excel表，孔的大小应符合表中所述规律，而位置和大小并不与表完全一致。若完全按照表格制作，则可能无法制作出音调正确的笛子。</p>
-<p>自下而上开完六孔，则测试每一孔的音调并按上述方法调整。可以尝试完整演奏音乐，测试笛子的性能。对直接（管套）、木塞进行微调后，获得最佳的笛子状态。</p>
-<p>进一步打磨笛头、笛身、指孔使之光滑美观。至此，哨笛的制作就完成了。</p>
-<h2 id="后记">后记</h2>
-<p>哨笛的制作工序简单，这也从另一个侧面反映了其便士笛这一名称的由来，即，一个便士就能买到的笛子。在制作完这把高音D调的哨笛之后，我继续制作了低音D调的哨笛，安装了一个直接并制作了一个中音F调的笛身。由于采用了25的线管，内径约为22.25mm，低音D调的哨笛音色低沉且悠扬，但指距较大，按起来比较费劲。而F调的笛身则非常废气且难吹，可见，过粗的管径不适合制作中音哨笛。</p>
-<img src="/2020/05/17/2020051716/20200507.jpg" class="" width="272">
-<h2 id="参考文献">参考文献</h2>
-<p>[1] Gonzato G., "The "Low-Tech" Whistle: How to make a fine PVC whistle," http://www.ggwhistles.com/howto, Oct. 2016.</p>
-<p>[2] 飘去来, "DIY哨笛数据汇总," https://tieba.baidu.com/p/3511500404?red_tag=1156576733, Jan. 2015.</p>
-]]></content>
-      <categories>
-        <category>音乐</category>
-      </categories>
-      <tags>
-        <tag>哨笛</tag>
-        <tag>制作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Amazing Grace</title>
-    <url>/2020/05/18/2020051821/</url>
-    <content><![CDATA[<center>
-和 BIT 的 Wei 博士合奏 Amazing Grace
-</center>
-<video src="/2020/05/18/2020051821/amazing.mp3" preload="metadata" controls playsinline poster="">Sorry, your browser does not support the video tag.</video>
-]]></content>
-      <categories>
-        <category>音乐</category>
-      </categories>
-      <tags>
-        <tag>哨笛</tag>
-        <tag>Amazing Grace</tag>
-        <tag>奇异恩典</tag>
-        <tag>长笛</tag>
-        <tag>演奏</tag>
-        <tag>合奏</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Endnote X9不能正确识别期刊名之解决方法</title>
-    <url>/2020/12/26/2020122621/</url>
-    <content><![CDATA[<p>更新Endnote X9后发现，在谷歌学术下载的.enw文件均无法正确识别期刊名。查阅相关资料，了解到按下列方法可解决问题。<a id="more"></a></p>
-<ol type="1">
-<li><p>下载该filter文件</p>
-<p><a href="https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf" target="_blank" rel="noopener">https://endnote.com/wp-content/uploads/plugins/filters/EndNote%20Import.enf</a></p></li>
-<li><p>双击打开，确保文件名为EndNote Import，并点击 Save As。</p></li>
-<li><p>关闭窗口</p></li>
-</ol>
-<p>此时，Endnote即可正确识别期刊名。注意，首次导入文献可能较慢，需耐心等待。</p>
-]]></content>
-      <categories>
-        <category>计算机</category>
-      </categories>
-      <tags>
-        <tag>endnote</tag>
-        <tag>解决方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>圣诞节</title>
-    <url>/2020/12/25/2020122520/</url>
-    <content><![CDATA[<img src="/2020/12/25/2020122520/20201201.jpg" class="">
-]]></content>
-      <categories>
-        <category>旅行</category>
-      </categories>
-      <tags>
-        <tag>武汉</tag>
-        <tag>街道口</tag>
-        <tag>Wuhan</tag>
-        <tag>Jiedaokou</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>惊不惊喜？意不意外？po主又回来了！</title>
-    <url>/2018/04/15/surprise/</url>
-    <content><![CDATA[<p>沉寂了很长，很长，很长，很长，很长一段时间后，po主又回来更博客了。</p>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>本网站现已支持Disqus，请检查您的网络以获得最佳体验</title>
-    <url>/2020/12/26/top/</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
-    <title>怎样使用UltraISO刻录Win系列系统U盘镜像</title>
-    <url>/2018/06/01/2018060122/</url>
-    <content><![CDATA[<p>很多朋友问我怎么装系统，我也多次进行过现场和远程指导，但大多数人都觉得很麻烦，不愿意学。在这里，我给出一个相对简单的Win系列教程，大家可以跟着我一步一步地完成“刻录系统镜像”到“UEFI安装操作系统”。对于linux系统的安装方法，我将在之后给出。<a id="more"></a></p>
-<p>UltraISO是一款应用广泛的镜像工具，考虑到U盘的普及率越来越高，刻录光盘的成本较高，这里采用U盘安装。 首先，需要准备以下材料：</p>
-<ol type="1">
-<li><p>8G或更大的U盘一个</p></li>
-<li><p>操作系统镜像</p></li>
-</ol>
-<h3 id="一下载相关文件">一、下载相关文件</h3>
-<p>首先下载系统镜像，建议选择最新版本。为保险起见，你也可以验证你下载文件的SHA1值是否正确，这里为简化操作就省略这一步骤。然后需要借助软件UltraISO制作</p>
-<img src="/2018/06/01/2018060122/18060101.png" class="" title="图1 UltraISO软件目录">
-<h3 id="二载入镜像">二、载入镜像</h3>
-<p>打开UltraISOPortable.exe，进入软件界面</p>
-<img src="/2018/06/01/2018060122/18060102.png" class="" title="图2 UltraISO软件界面">
-<p>点击“文件”→“打开...”弹出下列对话框，导航到镜像位置并打开</p>
-<img src="/2018/06/01/2018060122/18060103.png" class="" title="图3 打开ISO文件">
-<p>这里展示的是Win7专业版的镜像，对于所有常见的Win系统，均可按照这里的方法进行刻录。打开之后，界面刷新如下图4所示，下面开始刻录U盘镜像。</p>
-<img src="/2018/06/01/2018060122/18060104.png" class="" title="图4 载入镜像文件">
-<h3 id="三刻录u盘镜像">三、刻录U盘镜像</h3>
-<p>首先将U盘插入电脑中，格式化U盘为FAT32格式（注意，此举会删除U盘内的所有数据，请先进行数据备份）。然后点击“启动”→ “写入硬盘镜像...”，随后弹出“写入硬盘镜像”对话框，如图5所示</p>
-<img src="/2018/06/01/2018060122/18060105.png" class="" title="图5 写入硬盘镜像对话框">
-<p>注意，硬盘驱动器选择你的U盘，选择错误会导致数据丢失。同时，在“刻录校验”前的复选框中打勾，并保持写入方式为默认的“USB-HDD+”方式，隐藏启动分区为默认的“无”，其他选项均为默认请勿点选。 点击“格式化”，选择文件系统为“FAT32”，再点击“开始”，完成U盘格式化后，点击“写入”。</p>
-<img src="/2018/06/01/2018060122/18060106.png" class="" title="图6 格式化U盘">
-<p>待消息框中提示写入完毕后，弹出U盘，关闭软件。至此系统U盘镜像制作完毕。</p>
-<p>下一篇文章中，会详细讲解“UEFI+GPT安装Windows10”的方法步骤。</p>
-]]></content>
-      <categories>
-        <category>计算机</category>
-      </categories>
-      <tags>
-        <tag>装机</tag>
-        <tag>装系统</tag>
-        <tag>镜像</tag>
-        <tag>操作系统</tag>
+        <tag>机器学习</tag>
+        <tag>BP神经网络</tag>
+        <tag>识别</tag>
       </tags>
   </entry>
   <entry>
     <title>利用一阶谓词逻辑求解猴子摘香蕉问题</title>
     <url>/2018/07/07/2018070709/</url>
-    <content><![CDATA[<p>  利用一阶谓词逻辑求解猴子摘香蕉问题：房内有一个猴子，一个箱子，天花板上挂了一串香蕉，其位置如图1所示，猴子为了拿到香蕉，它必须把箱子搬到香蕉下面，然后再爬到箱子上。请定义必要的谓词，列出问题的初始化状态（即图1所示状态），目标状态（猴子拿到了香蕉，站在箱子上，箱子位于位置b）。<a id="more"></a></p>
+    <content><![CDATA[<p>  利用一阶谓词逻辑求解猴子摘香蕉问题：房内有一个猴子，一个箱子，天花板上挂了一串香蕉，其位置如图1所示，猴子为了拿到香蕉，它必须把箱子搬到香蕉下面，然后再爬到箱子上。请定义必要的谓词，列出问题的初始化状态（即图1所示状态），目标状态（猴子拿到了香蕉，站在箱子上，箱子位于位置b）。<span id="more"></span></p>
 <img src="/2018/07/07/2018070709/18070701.png" class="" title="图1 猴子摘香蕉">
 <h3 id="实验方案">1 实验方案</h3>
 <h4 id="定义谓词">1.1 定义谓词</h4>
@@ -874,15 +738,136 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
         <category>算法</category>
       </categories>
       <tags>
-        <tag>机器学习</tag>
         <tag>谓词逻辑</tag>
         <tag>猴子摘香蕉</tag>
+        <tag>机器学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>怎样使用UltraISO刻录Win系列系统U盘镜像</title>
+    <url>/2018/06/01/2018060122/</url>
+    <content><![CDATA[<p>很多朋友问我怎么装系统，我也多次进行过现场和远程指导，但大多数人都觉得很麻烦，不愿意学。在这里，我给出一个相对简单的Win系列教程，大家可以跟着我一步一步地完成“刻录系统镜像”到“UEFI安装操作系统”。对于linux系统的安装方法，我将在之后给出。<span id="more"></span></p>
+<p>UltraISO是一款应用广泛的镜像工具，考虑到U盘的普及率越来越高，刻录光盘的成本较高，这里采用U盘安装。 首先，需要准备以下材料：</p>
+<ol type="1">
+<li><p>8G或更大的U盘一个</p></li>
+<li><p>操作系统镜像</p></li>
+</ol>
+<h3 id="一下载相关文件">一、下载相关文件</h3>
+<p>首先下载系统镜像，建议选择最新版本。为保险起见，你也可以验证你下载文件的SHA1值是否正确，这里为简化操作就省略这一步骤。然后需要借助软件UltraISO制作</p>
+<img src="/2018/06/01/2018060122/18060101.png" class="" title="图1 UltraISO软件目录">
+<h3 id="二载入镜像">二、载入镜像</h3>
+<p>打开UltraISOPortable.exe，进入软件界面</p>
+<img src="/2018/06/01/2018060122/18060102.png" class="" title="图2 UltraISO软件界面">
+<p>点击“文件”→“打开...”弹出下列对话框，导航到镜像位置并打开</p>
+<img src="/2018/06/01/2018060122/18060103.png" class="" title="图3 打开ISO文件">
+<p>这里展示的是Win7专业版的镜像，对于所有常见的Win系统，均可按照这里的方法进行刻录。打开之后，界面刷新如下图4所示，下面开始刻录U盘镜像。</p>
+<img src="/2018/06/01/2018060122/18060104.png" class="" title="图4 载入镜像文件">
+<h3 id="三刻录u盘镜像">三、刻录U盘镜像</h3>
+<p>首先将U盘插入电脑中，格式化U盘为FAT32格式（注意，此举会删除U盘内的所有数据，请先进行数据备份）。然后点击“启动”→ “写入硬盘镜像...”，随后弹出“写入硬盘镜像”对话框，如图5所示</p>
+<img src="/2018/06/01/2018060122/18060105.png" class="" title="图5 写入硬盘镜像对话框">
+<p>注意，硬盘驱动器选择你的U盘，选择错误会导致数据丢失。同时，在“刻录校验”前的复选框中打勾，并保持写入方式为默认的“USB-HDD+”方式，隐藏启动分区为默认的“无”，其他选项均为默认请勿点选。 点击“格式化”，选择文件系统为“FAT32”，再点击“开始”，完成U盘格式化后，点击“写入”。</p>
+<img src="/2018/06/01/2018060122/18060106.png" class="" title="图6 格式化U盘">
+<p>待消息框中提示写入完毕后，弹出U盘，关闭软件。至此系统U盘镜像制作完毕。</p>
+<p>下一篇文章中，会详细讲解“UEFI+GPT安装Windows10”的方法步骤。</p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>装机</tag>
+        <tag>装系统</tag>
+        <tag>镜像</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一种常用的无人机信道路径损耗模型</title>
+    <url>/2018/04/30/2018043016/</url>
+    <content><![CDATA[<p>根据《中华人民共和国无线电频率划分规定》及我国频谱使用情况，工信部规定了用于无人驾驶航空器系统的频段为840.5 - 845MHz、1430 - 1444MHz和2408 - 2440MHz。与传统的星地链路不同的是，无人机的飞行高度有限，卫星通信的信号一般要经过对流层、平流层、电离层和外层空间，其跨越距离大，因而影响信号传播的因素很多，通常采用的建模方法是阴影莱斯衰落模型。<span id="more"></span>今年一月份，民航总局对外发布了《关于征求《无人驾驶航空器飞行管理暂行条例（征求意见稿）》意见的通知》（下文简称《通知》），《通知》精神根据无人机运行风险大小，将民用无人机分为微型、轻型、小型、中型、大型等五个类型，其中：</p>
+<div class="note info"><p>微型无人机，是指空机重量小于0.25千克，设计性能同时满足飞行真高不超过50米、最大飞行速度不超过40千米/小时、无线电发射设备符合微功率短距离无线电发射设备技术要求的遥控驾驶航空器。</p>
+<p>轻型无人机，是指同时满足空机重量不超过4千克，最大起飞重量不超过7千克，最大飞行速度不超过100千米/小时，具备符合空域管理要求的空域保持能力和可靠被监视能力的遥控驾驶航空器，但不包括微型无人机。</p>
+<p>小型无人机，是指空机重量不超过15千克或者最大起飞重量不超过25千克的无人机，但不包括微型、轻型无人机。</p>
+<p>中型无人机，是指最大起飞重量超过25千克不超过150千克，且空机重量超过15千克的无人机。</p>
+<p>大型无人机，是指最大起飞重量超过150千克的无人机。</p>
+</div>
+<p>同时《通知》拟划设以下管控空域：</p>
+<ol type="1">
+<li><p>海拔高度大于120m</p></li>
+<li><p>5000m高空设立禁飞区</p></li>
+<li><p>2000m高空设立危险区</p></li>
+<li><p>植保机飞行高度不得大于30m</p></li>
+</ol>
+<p>因而，在研究无人机信道建模时，需要考虑无人机的飞行高度和无人机所处的电磁环境。假设无人机作为基站与地面用户之间的信道如图1所示，考虑到信道的互易性，在这里分析下行信道的路径损耗。无人机发送的信号在无障碍物的空中自由传播时只考虑自由空间路径损耗，当信号进入城镇环境中时，由于建筑物的阻挡和散射导致信号受到额外的、服从高斯分布的加性损耗，在此处我们将其定义为过度路径损耗 <span class="math inline">\({\eta}\)</span> ，该损耗与角度 <span class="math inline">\({\theta}\)</span> 有关[1]。</p>
+<img src="/2018/04/30/2018043016/18043001.png" class="" title="图1 无人机信道路径损耗模型">
+<p>根据上述假设，我们将无人机信道路径损耗 <span class="math inline">\({\rm{PL}_\xi}\)</span> 建模为</p>
+<p><span class="math display">\[
+\rm{PL}_\xi = \rm{FSPL} + \eta_\xi
+\]</span></p>
+<p>其中， <span class="math inline">\({\rm{FSPL}}\)</span> 表示自由空间路径损耗， <span class="math inline">\({\xi}\)</span> 表示当前信道， <span class="math inline">\({\eta_\xi}\)</span> 表示过度路径损耗。则路径损耗的期望表示为</p>
+<p><span class="math display">\[
+\Lambda = \sum\limits_\xi {\rm{PL}_\xi\bf{P}\left(\xi,\theta\right)}
+\]</span></p>
+<p>式中 <span class="math inline">\({\bf{P}\left(\xi,\theta\right)}\)</span> 表示特定信道类型的发生概率，这里我们考虑视距传输和非视距传输两种特定情况，即 <span class="math inline">\({\xi \in \left\{ {\rm{LoS,NLoS}} \right\}}\)</span> 。则有</p>
+<p><span class="math display">\[
+\bf{P}\left(\rm{NLoS},\theta\right)=1-\bf{P}\left(\rm{LoS},\theta\right)
+\]</span></p>
+<p>故路径损耗的期望可以由链路的发生概率和对应的损耗表示，即</p>
+<p><span class="math display">\[
+\Lambda=\bf{P}\left(\rm{LoS}\right)\times\rm{PL}_{\rm{LoS}}+\bf{P}\left(\rm{NLoS}\right)\times\rm{PL}_{\rm{NLoS}}
+\]</span></p>
+<p>根据国际电信联盟（ITU）的建议书P1410 3-60 GHz频带范围内地面宽带无线电接入系统设计所需的传播数据和预测方法[2]可知，无人机信道的视距传输概率符合如下表达式</p>
+<p><span class="math display">\[
+\bf{P}\left(\rm{LoS}\right)=\frac{1}{1+a\exp\left(-b\left(\frac{180}{\pi}{\tan}^{-1}\left(\frac{h}{r}\right)-a\right)\right)}
+\]</span></p>
+<p>其中 <span class="math inline">\(a\)</span> 、 <span class="math inline">\(b\)</span> 为与环境有关的常量，视距路径与非视距路径的传输损耗由下式给出</p>
+<p><span class="math display">\[
+\rm{PL}_\rm{LoS} = 20\log \left( \frac{4\pi{f_c}d}{c} \right) + \eta_\rm{LoS}
+\]</span></p>
+<p><span class="math display">\[
+\rm{PL}_\rm{NLoS} = 20\log \left( \frac{4\pi{f_c}d}{c} \right) + \eta_\rm{NLoS}
+\]</span></p>
+<p>其中 <span class="math inline">\({d=\sqrt{h^2+r^2}}\)</span> ，为无人机与用户间的距离。根据上述公式即可得到无人机信道路径损耗的统计值。</p>
+<p>参考文献</p>
+<p>[1] A. Al-Hourani, S. Kandeepan, and S. Lardner, "Optimal LAP Altitude for Maximum Coverage," IEEE Wireless Communications Letters, vol. 3, no. 6, pp. 569-572, Dec 2014.</p>
+<p>[2] ITU-R, "Propagation data and prediction methods required for the design of terrestrial broadband radio access systems operating in a frequency range from 3 to 60 GHz," ITU-R P.1410 ,2013.</p>
+]]></content>
+      <categories>
+        <category>信息与通信工程</category>
+      </categories>
+      <tags>
+        <tag>无人机</tag>
+        <tag>信道</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>移动通信网络的基本组成</title>
+    <url>/2018/04/19/2018041916/</url>
+    <content><![CDATA[<p>传统的GSM网络主要由四部分组成：一是移动台（MS，Mobile Station），也就是我们所说的用户、终端设备；二是基站子系统（BSS），它包括了我们的基站（又叫“基站收发信台”，BTS，Base Transceiver Station）和基站控制器（BSC，Base Station Controller），这一部分是移动台的上级，属于接入网；三是网络子系统（NSS，Network and Switching Subsystem），属于核心网；第四部分为操作管理系统（OMS，Operations Management System），用来监控网络状态。<span id="more"></span></p>
+<img src="/2018/04/19/2018041916/18041901.jpg" class="" title="图1 GSM网络结构">
+<p>可以看出，GSM网络结构是金字塔型结构，其基本链路可简化为：用户—BTS—BSC—核心网，是一种典型的集中式控制结构。</p>
+<h1 id="g网络的组成">3G网络的组成</h1>
+<p>在3G网络中，BTS换成了NodeB，而BSC换成了RNC。实际上NodeB只负责CDMA的数据传输，而用户分配给哪个NodeB、资源控制等等工作统统由RNC管理。也就是说NodeB只负责物理层（PHY层），而RNC负责媒体接入控制层（MAC层）、无线链路控制层（RLC层）以及无线资源控制层（RRC层）。</p>
+<img src="/2018/04/19/2018041916/18041902.jpg" class="" title="图2 3G网络结构">
+<p>由此可见，在网络结构上，3G和2G区别不大，只是在命名上有所差别。</p>
+<h1 id="lte网络的组成">LTE网络的组成</h1>
+<p>LTE网络对接入网进行了很大程度的修改，其中：扁平化思想被首次提出，为了降低延迟去掉了RNC，使得核心网与基站能够直接连接。同时基站NodeB改名为eNodeB，并融入了大部分RNC功能，包括无线资源管理、接入控制、资源分配、用户平面和控制平面数据的加密等。</p>
+<img src="/2018/04/19/2018041916/18041903.jpg" class="" title="图3 eNodeB与核心网">
+<p>上图可以直观的看出，eNodeB不仅与核心网（分组核心网EPC，包含MME和S-GW）以S1接口相连，而且通过X2接口与邻近基站互联。其中S1接口分为S1-MME（控制面，位置更新，鉴权加密，而其他的无线资源管理如切换，功率控制则由eNodeB管理），S1-U（用户面，走话音和数据）。X2接口则完成了绝大部分RNC的工作，比如传递负载情况，供eNodeB来控制切换以及负载均衡，也比如说发现相邻基站并自动互联。LTE的网络结构如下</p>
+<img src="/2018/04/19/2018041916/18041904.jpg" class="" title="图4 LTE网络结构">
+<p>由于LTE网络采用了扁平化的结构，导致BSC下移至BTS中，因而能够使基站与核心网直接连接完成话音、数据线路的建立，同时和邻近的基站直接相连完成BSC的无线资源管理工作。</p>
+]]></content>
+      <categories>
+        <category>信息与通信工程</category>
+      </categories>
+      <tags>
+        <tag>移动通信</tag>
+        <tag>LTE</tag>
       </tags>
   </entry>
   <entry>
     <title>浅谈芯片电源脚电容的取值问题</title>
     <url>/2018/04/15/2018041521/</url>
-    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<a id="more"></a></p>
+    <content><![CDATA[<p>不论是看芯片手册还是看现有的成品板，我们总会发现一些芯片电源脚旁边总是连着小电容。随着阅历的不断加深，我们甚至能脱口而出它们的容值，即100nF，2.2uF、10uF、47uF，大多数情况下还会直接用100nF，10uF。但是令许多人不能理解的是，为何要在此处放置100nF和10uF的电容，而且要求尽量靠近电源脚？也许还有人会问，为什么到处都能见到104电容（即100nF电容），它的兼容性怎么这么强？带着这些疑问，我们在这里简要的探讨100nF和10uF的问题。<span id="more"></span></p>
 <h2 id="什么是滤波退耦">什么是滤波、退耦</h2>
 <p>记得大学里刚进实验室那会，老师说千万不能让运放自激，不然就会出现正反馈致使电路失效，而解决自激的方法除了合理设计电路，另一个重要的方面就是布局布线。也就是说缩短反馈支路，能够有效的降低自激的概率，同时老师也强调，一定要在电源脚放两个电容，一个是100nF，另一个是10uF，其中100nF一般是一个0805的贴片，10uF是一个1206的钽电容。老师说做好电源滤波和退耦就能减少各种问题，所以应用这个容值就成了一个墨守成规的定理，也很少人去研究，反正好使就对了。那这两个电容究竟是干啥用的？他们是滤波电容还是退耦电容呢？</p>
 <p>一些PCB设计指导认为，在电源端放置一个1~10uF的电容来滤除低频噪声，在每个器件的电源与地之间放置一个0.01~0.1uF的电容来滤除高频噪声，显然这是从滤波的层面去考虑的。我们知道，电路要稳定可靠的运行，其电源一定要“干净”。所谓干净就是不能有杂波，在数字电路中，我们常常会看见FPGA的旁边和底面放置有大量的贴片电容，又如在模拟电路中，音乐发烧友总要在线性电源中放许多上千uF的大电容构建“大水塘”，这实际上就是为了滤除电源中的杂波。</p>
@@ -910,5 +895,14 @@ C=F\sum^r_{i=1}log\left(1+\frac{\lambda_iP_T}{M_T\sigma^2}\right)=Flog\prod^r_{i
         <tag>退耦</tag>
         <tag>滤波</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>惊不惊喜？意不意外？po主又回来了！</title>
+    <url>/2018/04/15/surprise/</url>
+    <content><![CDATA[<p>沉寂了很长，很长，很长，很长，很长一段时间后，po主又回来更博客了。</p>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+      </categories>
   </entry>
 </search>
